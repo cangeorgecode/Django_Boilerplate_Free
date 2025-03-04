@@ -1,0 +1,115 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>{% block title %}Django SaaS Boilerplate{% endblock %}</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% tailwind_css %}
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
+    <script src="{% static 'htmx.min.js' %}" defer></script>
+    <script src="{% static 'kutty.min.js' %}" defer></script>
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+    {% block scripts %}{% endblock scripts %}
+  </head>
+
+  <body class="min-h-screen flex flex-col bg-gradient-to-br from-gray-800 to-gray-900 text-gray-200">
+    <header class="z-30 w-full px-4 py-6 bg-gray-900/80 backdrop-blur-sm">
+      <div class="flex items-center justify-between mx-auto max-w-7xl">
+        <a href="{% url 'index' %}" title="Django Boilerplate" class="flex items-center">
+          <img src="{% static 'Your_logo.png' %}" class="h-10" alt="Django Boilerplate" />
+          <span class="ml-2 text-xl font-bold text-white">{% block header_logo_text %}Django Boilerplate{% endblock %}</span>
+        </a>
+        <div class="flex items-center space-x-4">
+          <div class="hidden space-x-4 md:inline-flex">
+            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Features</a>
+            <a href="{% url 'pricing' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition">Pricing</a>
+            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Blog</a>
+            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Company</a>
+            {% if user.is_authenticated %}
+            <a href="{% url 'profile' %}" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Profile</a>
+            <a href="{% url 'account_logout' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition">Logout</a>
+            {% else %}
+            <a href="{% url 'account_signup' %}" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Register</a>
+            <a href="{% url 'account_login' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition">Sign In</a>
+            {% endif %}
+          </div>
+          <div class="inline-flex md:hidden" x-data="{ open: false }">
+            <button class="flex-none px-2 text-blue-400 hover:text-blue-300" @click="open = true">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
+                <line x1="3" y1="12" x2="21" y2="12"></line>
+                <line x1="3" y1="6" x2="21" y2="6"></line>
+                <line x1="3" y1="18" x2="21" y2="18"></line>
+              </svg>
+              <span class="sr-only">Open Menu</span>
+            </button>
+            <div class="absolute top-0 left-0 right-0 z-50 flex flex-col p-4 mt-16 bg-gray-900 rounded-lg shadow-lg" x-show.transition="open" @click.away="open = false" x-cloak>
+              <button class="self-end text-gray-400 hover:text-gray-200" @click="open = false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+                <span class="sr-only">Close Menu</span>
+              </button>
+              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Features</a>
+              <a href="{% url 'pricing' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Pricing</a>
+              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Blog</a>
+              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Company</a>
+              {% if user.is_authenticated %}
+              <a href="{% url 'profile' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Profile</a>
+              <a href="{% url 'account_logout' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Logout</a>
+              {% else %}
+              <a href="{% url 'account_signup' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Register</a>
+              <a href="{% url 'account_login' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Sign In</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex-grow">
+      {% if messages %}
+        {% for message in messages %}
+          <div class="p-4">
+            <div role="alert" class="rounded-xl border border-gray-700 bg-gray-800 p-4">
+              <div class="flex items-start gap-4">
+                <span class="text-green-400">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </span>
+                <div class="flex-1">
+                  <p class="mt-1 text-sm text-gray-300">{{ message }}</p>
+                </div>
+                <button class="text-gray-400 hover:text-gray-200 transition" onclick="this.parentElement.parentElement.remove()">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                  <span class="sr-only">Dismiss popup</span>
+                </button>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+      {% block content %}{% endblock content %}
+    </div>
+
+    
+    <footer>
+      <div
+        class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between"
+      >
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
+          >Built with 🫶 by <a href="https://x.com/joji_jiji" target="_blank">George</a>
+        </span>
+        <div class="flex space-x-6">
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">Terms</a>
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">Privacy</a>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>

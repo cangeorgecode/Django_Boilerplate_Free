@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load account %}
+{% load allauth %}
+{% block head_title %}
+    {% trans "Confirm Email Address" %}
+{% endblock head_title %}
+{% block content %}
+<section class="bg-white dark:bg-gray-900">
+  <div class="max-w-3xl px-6 py-16 mx-auto text-center">
+    <h1 class="text-3xl font-semibold text-gray-800 dark:text-gray-100">
+      {% trans "Confirm Email Address" %}
+    </h1>
+    {% if confirmation %}
+        {% user_display confirmation.email_address.user as user_display %}
+        {% if can_confirm %}
+        <p class="max-w-lg mx-auto mt-5 text-gray-500 dark:text-gray-400">
+                {% blocktrans with confirmation.email_address.email as email %}Please confirm that <a href="mailto:{{ email }}">{{ email }}</a> is an email address for user {{ user_display }}.{% endblocktrans %}
+            </p>
+            
+              {% url 'account_confirm_email' confirmation.key as action_url %}
+            {% element form method="post" action=action_url %}
+                {% slot actions %}
+                    {% csrf_token %}
+                    {{ redirect_field }}
+                    <button class="text-white bg-blue-700 btn hover:bg-blue-900 mt-4" type="submit">
+                        {% trans 'Confirm' %}
+                      </button>
+                {% endslot %}
+            {% endelement %}
+        {% else %}
+        <p class="max-w-lg mx-auto mt-5 text-gray-500 dark:text-gray-400">
+                {% blocktrans %}Unable to confirm {{ email }} because it is already confirmed by a different account.{% endblocktrans %}
+              </p>
+        {% endif %}
+    {% else %}
+        {% url 'account_email' as email_url %}
+        <p class="max-w-lg mx-auto mt-5 text-gray-500 dark:text-gray-400">
+            {% blocktrans %}This email confirmation link expired or is invalid. Please <a href="{{ email_url }}">issue a new email confirmation request</a>.{% endblocktrans %}
+        </p>
+    {% endif %}
+    <p class="max-w-lg mx-auto mt-5 text-gray-500 dark:text-gray-400">
+
+    </p>
+  </div>
+</section>
+
+{% endblock content %}

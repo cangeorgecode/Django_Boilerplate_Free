@@ -1,0 +1,69 @@
+<div class="w-full px-4 mt-6 space-y-6" hx-target="#profile-display" hx-swap="innerHTML">
+    <form hx-post="{% url 'profile_edit' %}" hx-swap="outerHTML" hx-target="#profile-display" enctype="multipart/form-data">
+      {% csrf_token %}
+      <label class="block">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Email</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="email" 
+          name="email" 
+          value="{{ user.email }}" 
+          required 
+        />
+      </label>
+      <label class="block">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Avatar</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg" 
+          type="file" 
+          name="avatar" 
+          accept="image/*" 
+        />
+      </label>
+      <label class="block">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Current Password</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="password" 
+          name="current_password" 
+          placeholder="••••••••" 
+          required 
+        />
+      </label>
+      <label class="block">
+        <span class="block mb-2 text-sm font-medium text-gray-300">New Password</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="password" 
+          name="password1" 
+          placeholder="••••••••" 
+        />
+      </label>
+      <label class="block">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Confirm New Password</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="password" 
+          name="password2" 
+          placeholder="••••••••" 
+        />
+      </label>
+      <div class="flex space-x-4">
+        <button 
+          type="submit" 
+          class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition transform hover:scale-105"
+        >
+          Save
+        </button>
+        <button 
+          type="button" 
+          class="w-full text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white font-semibold py-2 px-4 rounded-lg transition transform hover:scale-105"
+          hx-get="{% url 'profile' %}" 
+          hx-target="#profile-edit-form" 
+          hx-swap="outerHTML"
+        >
+          Cancel
+        </button>
+      </div>
+    </form>
+  </div>

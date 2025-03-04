@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="px-4 py-24 mx-auto max-w-7xl min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+  <div class="w-full max-w-lg bg-gray-800 border border-gray-700 rounded-lg shadow"> <!-- Increased max-w-sm to max-w-lg for wider form -->
+    <div class="flex flex-col items-center pb-10 pt-10">
+      <!-- Avatar -->
+      <img 
+        src="{{ user.profile.avatar.url|default:'/static/default_avatar.png' }}" 
+        class="w-16 h-16 rounded-full mb-4" 
+        alt="Profile Avatar"
+      >
+      
+      <!-- Profile Info -->
+      <div id="profile-display">
+        <h5 class="mb-1 text-xl font-medium text-white">{{ user.username }}</h5>
+        <span class="text-sm text-gray-400">{{ user.email }}</span>
+        <span class="text-sm text-gray-400 mt-2">Joined: {{ user.date_joined|date:"M d, Y" }}</span>
+        {% if user_payment %}
+          <span class="text-sm text-gray-400 mt-2">Your purchase: {{ user_payment.product_name }}</span>
+        {% else %}
+          <span class="text-sm text-gray-400 mt-2">You haven’t made a purchase yet—help a brother out!</span>
+        {% endif %}
+      </div>
+
+      <!-- Edit Form (Hidden by Default) -->
+      <div id="profile-edit-form" class="hidden w-full px-4 mt-6 space-y-6" hx-target="#profile-display" hx-swap="innerHTML">
+        <form hx-post="{% url 'profile_edit' %}" hx-swap="outerHTML" hx-target="#profile-display" enctype="multipart/form-data">
+          {% csrf_token %}
+          <label class="block">
+            <span class="block mb-2 text-sm font-medium text-gray-300">Email</span>
+            <input 
+              class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+              type="email" 
+              name="email" 
+              value="{{ user.email }}" 
+              required 
+            />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm font-medium text-gray-300">Avatar</span>
+            <input 
+              class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg" 
+              type="file" 
+              name="avatar" 
+              accept="image/*" 
+            />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm font-medium text-gray-300">Current Password</span>
+            <input 
+              class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+              type="password" 
+              name="current_password" 
+              placeholder="••••••••" 
+              required 
+            />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm font-medium text-gray-300">New Password</span>
+            <input 
+              class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+              type="password" 
+              name="password1" 
+              placeholder="••••••••" 
+            />
+          </label>
+          <label class="block">
+            <span class="block mb-2 text-sm font-medium text-gray-300">Confirm New Password</span>
+            <input 
+              class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+              type="password" 
+              name="password2" 
+              placeholder="••••••••" 
+            />
+          </label>
+          <div class="flex space-x-4">
+            <button 
+              type="submit" 
+              class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg transition transform hover:scale-105"
+            >
+              Save
+            </button>
+            <button 
+              type="button" 
+              class="w-full text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white font-semibold py-2 px-4 rounded-lg transition transform hover:scale-105"
+              hx-get="{% url 'profile' %}" 
+              hx-target="#profile-edit-form" 
+              hx-swap="outerHTML"
+            >
+              Cancel
+            </button>
+          </div>
+        </form>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex mt-6 space-x-4">
+        <button 
+          class="inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white rounded-lg transition transform hover:scale-105"
+          hx-get="{% url 'profile_edit_form' %}" 
+          hx-target="#profile-edit-form" 
+          hx-swap="outerHTML"
+        >
+          Edit Profile
+        </button>
+        <a 
+          href="{% url 'account_logout' %}" 
+          class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition transform hover:scale-105"
+        >
+          Logout
+        </a>
+      </div>
+      
+      <!-- Delete Account -->
+      <button 
+        class="mt-4 text-red-400 hover:text-red-300 text-sm font-semibold"
+        hx-get="{% url 'profile_delete_confirm' %}" 
+        hx-target="#delete-modal" 
+        hx-swap="innerHTML"
+      >
+        Delete Account
+      </button>
+      <div id="delete-modal" class="mt-4"></div>
+    </div>
+  </div>
+</section>
+
+{% endblock content %}

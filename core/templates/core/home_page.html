@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+<!-- load wagtailcore_tags by adding this: -->
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-homepage{% endblock %}
+
+<!-- replace everything below with: -->
+{% block content %}
+    <article class="px-4 py-24 mx-auto max-w-7xl" itemid="#" itemscope itemtype="http://schema.org/BlogPosting">
+        <div class="w-full mx-auto mb-12 text-center md:w-2/3">
+        <p class="mb-3 text-xs font-semibold tracking-wider text-gray-500 uppercase">{{ page.tag | richtext }}</p>
+        <h1 class="mb-3 text-4xl font-bold text-gray-900 md:leading-tight md:text-5xl" itemprop="headline" title="Rise of Tailwind - A Utility First CSS Framework">
+            {{ page.title | richtext }}
+        </h1>
+        <p class="text-gray-700">
+            Written by
+            <span class="byline author vcard" itemprop="author" itemscope="itemscope" itemtype="http://schema.org/Person">
+            <a href="#" target="_blank" itemprop="url" rel="author noopener noreferrer" class="text-primary hover:text-primary-dark"><span itemprop="name">George</span></a>
+            </span>
+            on <time itemprop="datePublished dateModified" datetime="2010-08-07 11:11:03-0400" pubdate>{{ page.date | date:"m M Y"}}</time>
+        </p>
+        </div>
+    
+        <div class="mx-auto prose">
+            {{ page.body|richtext }}
+       
+        
+        </div>
+    </article>
+  
+    
+{% endblock %}

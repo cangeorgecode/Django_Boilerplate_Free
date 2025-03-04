@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="px-4 py-24 mx-auto max-w-7xl min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
+  <div class="w-full py-6 mx-auto md:w-3/5 lg:w-2/5">
+    <h1 class="mb-6 text-3xl font-bold text-white md:text-4xl md:leading-tight text-center">
+      Create Your Free Account
+    </h1>
+    <p class="mb-6 text-sm text-center text-gray-400">
+      Already have an account?
+      <a href="{% url 'account_login' %}" class="text-blue-400 hover:text-blue-300">Sign In</a>
+    </p>
+    
+    <form class="mt-8 space-y-6" action="{% url 'account_signup' %}" method="post" autocomplete="off">
+      {% csrf_token %}
+      {% if form.non_field_errors %}
+        <div class="text-red-400 text-sm">{{ form.non_field_errors }}</div>
+      {% endif %}
+      
+      <label class="block" for="username">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Username</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="text" 
+          id="username" 
+          name="username" 
+          placeholder="Username" 
+          hx-get="{% url 'check_username' %}?username={{ login.value }}"
+          hx-trigger="keyup changed delay:500ms"
+          hx-target="#username-feedback"
+          hx-swap="innerHTML" 
+          required 
+        />
+        <div id="username-feedback" class="text-gray-300 text-sm mt-1"></div>
+        {% if form.login.errors %}
+          <div class="text-red-400 text-sm mt-1">{{ form.login.errors }}</div>
+        {% endif %}
+      </label>
+      
+      <label class="block" for="email">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Your Email</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="email" 
+          name="email" 
+          id="email" 
+          placeholder="Ex. james@bond.com" 
+          inputmode="email" 
+          required 
+        />
+        {% if form.email.errors %}
+          <div class="text-red-400 text-sm mt-1">{{ form.email.errors }}</div>
+        {% endif %}
+      </label>
+
+      <label class="block" for="password1">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Create a Password</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="password" 
+          id="password1" 
+          name="password1" 
+          placeholder="••••••••" 
+          required 
+        />
+        {% if form.password1.errors %}
+          <div class="text-red-400 text-sm mt-1">{{ form.password1.errors }}</div>
+        {% endif %}
+      </label>
+
+      <label class="block" for="password2">
+        <span class="block mb-2 text-sm font-medium text-gray-300">Repeat Password</span>
+        <input 
+          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          type="password" 
+          id="password2" 
+          name="password2" 
+          placeholder="••••••••" 
+          required 
+        />
+        {% if form.password2.errors %}
+          <div class="text-red-400 text-sm mt-1">{{ form.password2.errors }}</div>
+        {% endif %}
+      </label>
+      
+      <button 
+        type="submit" 
+        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition transform hover:scale-105"
+      >
+        Sign Up
+      </button>
+    </form>
+
+    <p class="mt-6 text-sm text-center text-gray-400">
+      By clicking "Sign Up" you agree to our
+      <a href="#" class="text-blue-400 hover:text-blue-300">Terms of Service</a>
+      and
+      <a href="#" class="text-blue-400 hover:text-blue-300">Privacy Policy</a>.
+    </p>
+  </div>
+</section>
+
+{% endblock %}
