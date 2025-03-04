@@ -24,7 +24,7 @@
       </div>
 
       <!-- Edit Form (Hidden by Default) -->
-      <div id="profile-edit-form" class="hidden w-full px-4 mt-6 space-y-6" hx-target="#profile-display" hx-swap="innerHTML">
+      <div id="profile-edit-form" class="hidden w-full px-4 mt-6 space-y-6">
         <form hx-post="{% url 'profile_edit' %}" hx-swap="outerHTML" hx-target="#profile-display" enctype="multipart/form-data">
           {% csrf_token %}
           <label class="block">

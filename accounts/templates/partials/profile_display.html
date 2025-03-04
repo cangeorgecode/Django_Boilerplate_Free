@@ -1,8 +1,22 @@
-<h5 class="mb-1 text-xl font-medium text-white">{{ user.username }}</h5>
-<span class="text-sm text-gray-400">{{ user.email }}</span>
-<span class="text-sm text-gray-400 mt-2">Joined: {{ user.date_joined|date:"M d, Y" }}</span>
-{% if user_payment %}
-  <span class="text-sm text-gray-400 mt-2">Your purchase: {{ user_payment.product_name }}</span>
-{% else %}
-  <span class="text-sm text-gray-400 mt-2">You haven’t made a purchase yet—help a brother out!</span>
-{% endif %}
+<!-- partials/profile_display.html -->
+<div id="profile-display">
+  <h5 class="mb-1 text-xl font-medium text-white">{{ user.username }}</h5>
+  <span class="text-sm text-gray-400">{{ user.email }}</span>
+  <span class="text-sm text-gray-400 mt-2">Joined: {{ user.date_joined|date:"M d, Y" }}</span>
+  {% if user_payment %}
+    <span class="text-sm text-gray-400 mt-2">Your purchase: {{ user_payment.product_name }}</span>
+  {% else %}
+    <span class="text-sm text-gray-400 mt-2">You haven’t made a purchase yet—help a brother out!</span>
+  {% endif %}
+
+  <!-- Messages -->
+  {% if messages %}
+    <div class="mt-4">
+      {% for message in messages %}
+        <div class="text-sm p-2 rounded-lg {% if message.tags == 'success' %}bg-green-600 text-white{% else %}bg-red-600 text-white{% endif %}">
+          {{ message }}
+        </div>
+      {% endfor %}
+    </div>
+  {% endif %}
+</div>

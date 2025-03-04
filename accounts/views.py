@@ -5,6 +5,7 @@ from django.contrib import messages
 from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.template.loader import render_to_string
+from django.contrib.auth import update_session_auth_hash
 
 @login_required
 def profile(request):
@@ -26,7 +27,8 @@ def check_username(request):
 
 @login_required
 def profile_edit_form(request):
-    return HttpResponse(render_to_string('account/profile_edit_form.html', {'user': request.user}))
+    context = {'user': request.user}
+    return HttpResponse(render_to_string('account/profile_edit_form.html', context, request=request))
 
 @login_required
 def profile_edit(request):
@@ -49,10 +51,11 @@ def profile_edit(request):
         # Password Update
         if password1 and password2:
             if not user.check_password(current_password):
-                return HttpResponse("Invalid current password", status=400)
+                messages.error(request, "Invalid current password")
             if password1 != password2:
-                return HttpResponse("Passwords don’t match", status=400)
+                messages.error(request, "Passwords don’t match")
             user.set_password(password1)
+            messages.success(request, 'Password changed successfully!')
             update_session_auth_hash(request, user)  # Keeps user logged in after password change
 
         # Avatar Update
@@ -60,10 +63,11 @@ def profile_edit(request):
             user.profile.avatar = request.FILES['avatar']
 
         user.save()  # Saves User and triggers profile save via signal
-        return HttpResponse(render_to_string('accounts/profile_display.html', {
+        context = {
             'user': user,
-            'user_payment': user.payment_set.first()
-        }))
+            'messages': messages.get_messages(request),  # Fetch queued messages
+        }
+        return HttpResponse(render_to_string('partials/profile_display.html', context))
     return redirect('profile')
 
 @login_required
