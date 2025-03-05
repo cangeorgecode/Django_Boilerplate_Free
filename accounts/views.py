@@ -26,43 +26,74 @@ def check_username(request):
         return HttpResponse('<span class="text-green-600">Username is available</span>', status=200)
 
 @login_required
-def profile_edit_form(request):
+def change_password_form(request):
     context = {'user': request.user}
-    return HttpResponse(render_to_string('account/profile_edit_form.html', context, request=request))
+    return HttpResponse(render_to_string('account/change_password_form.html', context, request=request))
 
 @login_required
-def profile_edit(request):
+def change_email_form(request):
+    context = {'user': request.user}
+    return HttpResponse(render_to_string('account/change_email_form.html', context, request=request))
+
+@login_required
+def change_email(request):
     if request.method == 'POST':
         user = request.user
         email = request.POST.get('email')
         current_password = request.POST.get('current_password')
+
+        if email and email != user.email:
+            if not user.check_password(current_password):
+                messages.error(request, "Invalid current password")
+            else:
+                user.email = email
+                user.save()
+                # Trigger email verification if using Allauth
+                send_email_confirmation(request, user, signup=False)
+                messages.success(request, 'Email change requested. Please check your inbox.')
+                
+        context = {
+            'user': user,
+            'messages': messages.get_messages(request),
+        }
+        return HttpResponse(render_to_string('partials/profile_display.html', context))
+    return redirect('profile')
+
+@login_required
+def change_password(request):
+    if request.method == 'POST':
+        user = request.user
+        current_password = request.POST.get('current_password')
         password1 = request.POST.get('password1')
         password2 = request.POST.get('password2')
 
-        # Email Update
-        if email and email != user.email:
-            if not user.check_password(current_password):
-                return HttpResponse("Invalid current password", status=400)
-            user.email = email
-            # If Allauth requires email verification, this triggers it
-            from allauth.account.utils import send_email_confirmation
-            send_email_confirmation(request, user, signup=False)
-
-        # Password Update
         if password1 and password2:
             if not user.check_password(current_password):
                 messages.error(request, "Invalid current password")
-            if password1 != password2:
+            elif password1 != password2:
                 messages.error(request, "Passwords don’t match")
-            user.set_password(password1)
-            messages.success(request, 'Password changed successfully!')
-            update_session_auth_hash(request, user)  # Keeps user logged in after password change
+            else:
+                user.set_password(password1)
+                user.save()
+                update_session_auth_hash(request, user)  # Keep user logged in
+                messages.success(request, 'Password changed successfully!')
+        
+        context = {
+            'user': user,
+            'messages': messages.get_messages(request),
+        }
+        return HttpResponse(render_to_string('partials/profile_display.html', context))
+    return redirect('profile')
 
+@login_required
+def change_avatar(request):
+    if request.method == 'POST':
+        user = request.user
         # Avatar Update
         if 'avatar' in request.FILES:
             user.profile.avatar = request.FILES['avatar']
+            user.save()  # Saves User and triggers profile save via signal
 
-        user.save()  # Saves User and triggers profile save via signal
         context = {
             'user': user,
             'messages': messages.get_messages(request),  # Fetch queued messages
@@ -81,3 +112,12 @@ def profile_delete(request):
         user.delete()
         return JsonResponse({}, status=200, headers={'HX-Redirect': reverse('account_logout')})
     return redirect('profile')
+
+@login_required
+def profile_display(request):
+    print('cancel pressed')
+    return HttpResponse(render_to_string('partials/profile_display.html', {'user': request.user}))
+
+@login_required
+def profile_edit_blank(request):
+    return HttpResponse(render_to_string('partials/profile_edit_form_blank.html', {'user': request.user}))
