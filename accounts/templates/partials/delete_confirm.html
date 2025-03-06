@@ -1,20 +1,22 @@
-<div class="bg-gray-900 p-4 rounded-lg border border-gray-700">
-    <p class="text-gray-300 mb-4">Are you sure you want to delete your account?</p>
-    <form hx-post="{% url 'profile_delete' %}" hx-target="body" hx-swap="innerHTML">
-      {% csrf_token %}
-      <div class="flex space-x-4">
-        <button type="submit" class="px-4 py-2 bg-red-600 hover:bg-red-700 text-white font-semibold rounded-lg transition transform hover:scale-105">
-          Yes, Delete
-        </button>
-        <button 
-          type="button" 
-          class="px-4 py-2 text-red-400 border border-red-400 hover:bg-red-400 hover:text-white rounded-lg transition transform hover:scale-105"
-          hx-get="{% url 'profile' %}" 
-          hx-target="#delete-modal" 
-          hx-swap="innerHTML"
-        >
-          Cancel
-        </button>
-      </div>
-    </form>
+<div class="p-4 bg-gray-800 border border-gray-700 rounded-lg">
+  <p class="text-white">Are you sure you want to delete your account, {{ user.username }}?</p>
+  <div class="mt-4 flex space-x-4">
+    <button 
+      class="px-4 py-2 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg"
+      hx-post="{% url 'profile_delete' %}" 
+      hx-target="body" 
+      hx-swap="innerHTML"
+      hx-headers='{"X-CSRFToken": "{{ csrf_token }}"}'
+    >
+      Confirm
+    </button>
+    <button 
+      class="px-4 py-2 text-sm font-semibold text-gray-400 border border-gray-400 hover:bg-gray-700 rounded-lg"
+      hx-get="#" 
+      hx-target="#delete-modal" 
+      hx-swap="innerHTML"
+    >
+      Cancel
+    </button>
   </div>
+</div>

@@ -103,14 +103,14 @@ def change_avatar(request):
 
 @login_required
 def profile_delete_confirm(request):
-    return HttpResponse(render_to_string('partials/delete_confirm.html', {'user': request.user}))
+    return HttpResponse(render_to_string('partials/delete_confirm.html', {'user': request.user}, request=request))
 
 @login_required
 def profile_delete(request):
     if request.method == 'POST':
         user = request.user
         user.delete()
-        return JsonResponse({}, status=200, headers={'HX-Redirect': reverse('account_logout')})
+        return JsonResponse({}, status=200, headers={'HX-Redirect': reverse('index')})
     return redirect('profile')
 
 @login_required

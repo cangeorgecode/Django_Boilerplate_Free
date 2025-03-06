@@ -2,16 +2,13 @@
 {% block content %}
 
 <section class="px-4 py-24 mx-auto max-w-7xl min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-  <div class="w-full max-w-lg bg-gray-800 border border-gray-700 rounded-lg shadow"> <!-- Increased max-w-sm to max-w-lg for wider form -->
+  <div class="w-full max-w-lg bg-gray-800 border border-gray-700 rounded-lg shadow">
     <div class="flex flex-col items-center pb-10 pt-10">
-      <!-- Avatar -->
       <img 
         src="{{ user.profile.avatar.url|default:'/static/default_avatar.webp' }}" 
         class="w-16 h-16 rounded-full mb-4" 
         alt="Profile Avatar"
       >
-      
-      <!-- Profile Info -->
       <div id="profile-display" class="px-4">
         <h5 class="mb-1 text-xl font-medium text-white">{{ user.username }}</h5>
         <span class="text-sm text-gray-400">{{ user.email }}</span>
@@ -22,26 +19,20 @@
           <span class="text-sm text-gray-400 mt-2">You haven’t made a purchase yet—help a brother out!</span>
         {% endif %}
       </div>
-
-      <!-- Edit Form (Hidden by Default) -->
-      <div id="profile-edit-form">
-       
-
-
-      </div>
-      <button class="btn btn-primary"><a href="{% url 'account_email' %}">Change Email</a></button>
-      <button class="btn btn-primary"><a href="{% url 'account_change_password' %}">Change Password</a></button>
-
-      <!-- Actions -->
+      <div id="profile-edit-form"></div>
       <div class="flex mt-6 space-x-4">
-        <button 
+        <a 
+          href="{% url 'account_email' %}" 
           class="inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white rounded-lg transition transform hover:scale-105"
-          hx-get="#" 
-          hx-target="#profile-edit-form" 
-          hx-swap="outerHTML"
         >
-          Edit Profile
-        </button>
+          Change Email
+        </a>
+        <a 
+          href="{% url 'account_change_password' %}" 
+          class="inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white rounded-lg transition transform hover:scale-105"
+        >
+          Change Password
+        </a>
         <a 
           href="{% url 'account_logout' %}" 
           class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition transform hover:scale-105"
@@ -49,11 +40,9 @@
           Logout
         </a>
       </div>
-      
-      <!-- Delete Account -->
       <button 
         class="mt-4 text-red-400 hover:text-red-300 text-sm font-semibold"
-        hx-get="#" 
+        hx-get="{% url 'profile_delete_confirm' %}" 
         hx-target="#delete-modal" 
         hx-swap="innerHTML"
       >
@@ -64,4 +53,11 @@
   </div>
 </section>
 
+<!-- Add CSRF token and HTMX config -->
+<input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+<script>
+  document.addEventListener('htmx:configRequest', (event) => {
+    event.detail.headers['X-CSRFToken'] = '{{ csrf_token }}';
+  });
+</script>
 {% endblock content %}
