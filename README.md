@@ -32,7 +32,7 @@ Debug is set to True and allowed hosts haven't been set in the settings.py file.
 
 You will need:
 
-# For django-allauth, I have set every new user needs to confirm their email address
+For django-allauth, I have set every new user needs to confirm their email address
 - EMAIL_HOST_USER
 - EMAIL_HOST_PASSWORD
 
