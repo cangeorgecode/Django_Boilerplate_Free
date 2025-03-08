@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load wagtailcore_tags %}
+
+{% block body_class %}template-blogindexpage{% endblock %}
+
+{% block content %}
+    <section class="w-full px-4 py-24 mx-auto max-w-7xl md:w-3/4 lg:w-2/4">
+        <div class="mb-12 text-left md:text-center">
+          <h2 class="mb-2 text-3xl font-extrabold leading-tight text-gray-900">{{ page.title }}</h2>
+          <p class="text-lg text-gray-500">{{ page.intro|richtext }}</p>
+        </div>
+        <div class="flex flex-col space-y-12 divide-y divide-gray-200">
+            {% for post in page.get_children %}
+          <div>
+            <p class="pt-12 mb-3 text-sm font-normal text-gray-500">April 16, 2020</p>
+            <h2 class="mb-2 text-xl font-extrabold leading-snug tracking-tight text-gray-800 md:text-3xl">
+              <a href="{% pageurl post %}" class="text-gray-900 hover:text-purple-700">{{ post.title }}</a>
+            </h2>
+            <p class="mb-4 text-base font-normal text-gray-600">
+              Earlier RPA bots used to have some limitations like it would take structured data for processing from excel, database, on these data. But with advancements in technology like OCR (Optical
+              Character Recognition) and Machine Learning, RPA bots are capable of extracting these data …
+            </p>
+            <a href="{% pageurl post %}" class="btn btn-light btn-sm">Continue Reading</a>
+          </div>
+          {% endfor %}
+        </div>
+      </section>
+      
+
+{% endblock %}
