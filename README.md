@@ -1,6 +1,10 @@
-# Django Boilerplate for SaaS
+# Build a reliable MVP in 2 weeks
 
-[![Boilerplate Demo](https://img.youtube.com/vi/WQJePTIRvTw/0.jpg)](https://www.youtube.com/watch?v=WQJePTIRvTw)
+[![Watch the video](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/blob/main/thumbnail.jpg)](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/blob/main/demo.webm)
+
+## Why Django?
+Django may not be the fastest, but it's reliable, secure and modular. It makes for a perfect backend to build an MVP quickly. 
+
 
 ## Features
 
@@ -10,11 +14,11 @@
 - Email verification
 - Landing page template optimized for conversion
 - Django admin panel
-- Stripe payment (one-off & subscription) | Pro version only
+- Stripe | Pro version only
 
 ## Features to add
 
-- Django Rest Framework
+- Django Rest Framework for api
 - Social media login
 - Posthog analytics
 - User management dashboard
@@ -49,6 +53,8 @@ python manage.py runserver
 ### Please note
 
 Debug is set to True and allowed hosts haven't been set in the settings.py file.
+
+
 
 ### API, secret keys in the .env file
 
