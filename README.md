@@ -1,6 +1,6 @@
 # Build a reliable MVP in 2 weeks
 
-[![Watch the video](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/blob/main/thumbnail.jpg)](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/blob/main/demo.webm)
+![Demo Video](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/main/output.gif)
 
 ## Why Django?
 Django may not be the fastest, but it's reliable, secure and modular. It makes for a perfect backend to build an MVP quickly. 
