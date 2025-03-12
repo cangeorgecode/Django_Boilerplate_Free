@@ -10,7 +10,7 @@
 
 
 ### Django Boilerplate: 
-😎 Save Time (Skip 10+ hours of initial set up)  
+😎 Save Time (Skip 20+ hours of set up)  
 😎 Save Money (Already saved $999)  
 😎 Free forever  
 😎 Unlimited projects  
