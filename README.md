@@ -1,9 +1,8 @@
-# Django Boilerplate | More apps = More wins! 🚀🚀
-### I built 4 apps in 2 months while working a 9 to 5. 🎉🎉
+# Django Boilerplate | Build Faster & Cost Less 🚀🚀
+### Are you a developer who's tight on time and budget? 🤔  
 
-Are you a developer or a start up founder who's tight on time and budget? 🤔  
+### Introducing Django Boilerplate that helped me build 4 apps in 2 months while working a 9 to 5! 🎉
 
-This free boilerplate can help you build faster and keep your cost low 🚀  
 
 
 
