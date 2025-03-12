@@ -32,7 +32,6 @@ I built this boilerplate for myself but I want to help developers who are tight 
 ✅ Email verification  
 ✅ Landing page template optimized for conversion  
 ✅ Django admin panel  
-✅ Stripe | Pro version only  
 
 
 &nbsp;
@@ -51,6 +50,7 @@ I built this boilerplate for myself but I want to help developers who are tight 
 - Redis, Celery integration
 - Docker setup
 - CSV import/export
+- Stripe (one-off & subscriptions) payment
 
 
 &nbsp;
