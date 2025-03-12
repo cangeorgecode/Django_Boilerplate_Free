@@ -61,7 +61,7 @@
 ⚠️ __If you think $29 (one-off purchase) is a fair price for these features,__  ⚠️  
 
   
-Register interest here: https://form.typeform.com/to/tmAaAzBF 
+👉👉👉 Register interest here: https://form.typeform.com/to/tmAaAzBF 👈👈👈  
 
 
 &nbsp;
