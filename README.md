@@ -58,11 +58,11 @@
 &nbsp;
 
 
-🚨 __If you think $29 (one-off purchase) is a fair price for these features,__  🚨    
+🚨 __Would you pay $29 (one-off) for the Features coming soon?__  🚨    
 
   
-👉👉👉 Register interest here: https://form.typeform.com/to/tmAaAzBF 👈👈👈  
-(I won't send you spam mail)
+👉👉👉 Let me know here: https://form.typeform.com/to/tmAaAzBF 👈👈👈  
+
 
 &nbsp;
 
