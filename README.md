@@ -5,7 +5,7 @@
 &nbsp;
 
 
-[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-blue)](https://tally.so/r/mZD1Eo) **Would you pay $29 for a premium version with extra features?** Takes 10 seconds!
+[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-yellow)](https://tally.so/r/mZD1Eo) **Would you pay $29 for a premium version with extra features?** Takes 10 seconds!
 
 
 &nbsp;
