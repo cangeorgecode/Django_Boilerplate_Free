@@ -1,4 +1,3 @@
-[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-blue)](https://tally.so/r/mZD1Eo)
 # Django + HTMX Boilerplate for SaaS in 15 Mins 🚀🚀
 ### Are you a developer who's tight on time and budget? 🤔 Introducing Django Boilerplate that helped me build 4 apps in 2 months while working a 9 to 5! 🎉  
 
@@ -6,7 +5,7 @@
 &nbsp;
 
 
-📣 **Quick Survey:** I’m planning a premium version with extra features for $29 (one-time). Would you buy it? Please take 10 seconds to let me know: [Take the Survey](https://tally.so/r/mZD1Eo).
+[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-blue)](https://tally.so/r/mZD1Eo) **Would you pay $29 for a premium version with extra features?** Takes 10 seconds!
 
 
 &nbsp;
