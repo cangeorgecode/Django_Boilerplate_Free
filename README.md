@@ -5,6 +5,12 @@
 &nbsp;
 
 
+[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-yellow)](https://tally.so/r/mZD1Eo) **Other boilerplates cost $200+, would you pay $29 (one-off) for a premium version with extra features?** Takes 10 seconds! [Take the Survey](https://tally.so/r/mZD1Eo) 
+
+
+&nbsp;
+
+
 ### Django Boilerplate: 
 😎 Save Time (Skip 20+ hours of set up)  
 😎 Save Money (Already saved $999)  
@@ -50,7 +56,7 @@
 - CSV import/export
 - Stripe (one-off & subscriptions) payment
 
-[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-yellow)](https://tally.so/r/mZD1Eo) **Would you pay $29 for a premium version with extra features?** Takes 10 seconds! [Take the Survey](https://tally.so/r/mZD1Eo) 
+[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-yellow)](https://tally.so/r/mZD1Eo) **Other boilerplates cost $200+, would you pay $29 (one-off) for a premium version with extra features?** Takes 10 seconds! [Take the Survey](https://tally.so/r/mZD1Eo) 
 
 &nbsp;
 
