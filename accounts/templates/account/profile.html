@@ -1,54 +1,54 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="px-4 py-24 mx-auto max-w-7xl min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-  <div class="w-full max-w-lg bg-gray-800 border border-gray-700 rounded-lg shadow">
-    <div class="flex flex-col items-center pb-10 pt-10">
+<section class="min-h-screen flex items-center justify-center px-4 py-24 mx-auto max-w-7xl bg-base-200">
+  <div class="w-full max-w-lg card bg-base-100 shadow-xl">
+    <div class="card-body items-center text-center">
       <img 
         src="{{ user.profile.avatar.url|default:'/static/default_avatar.webp' }}" 
-        class="w-16 h-16 rounded-full mb-4" 
+        class="avatar w-16 h-16 rounded-full mb-4" 
         alt="Profile Avatar"
       >
-      <div id="profile-display" class="px-4">
-        <h5 class="mb-1 text-xl font-medium text-white">{{ user.username }}</h5>
-        <span class="text-sm text-gray-400">{{ user.email }}</span>
-        <span class="text-sm text-gray-400 mt-2">Joined: {{ user.date_joined|date:"M d, Y" }}</span>
+      <div id="profile-display" class="w-full">
+        <h5 class="card-title text-xl">{{ user.username }}</h5>
+        <span class="text-sm text-base-content/70">{{ user.email }}</span>
+        <span class="text-sm text-base-content/70 block mt-2">Joined: {{ user.date_joined|date:"M d, Y" }}</span>
         {% if user_payment %}
-          <span class="text-sm text-gray-400 mt-2">Your purchase: {{ user_payment.product_name }}</span>
+          <span class="text-sm text-base-content/70 block mt-2">Your purchase: {{ user_payment.product_name }}</span>
         {% else %}
-          <span class="text-sm text-gray-400 mt-2">You haven’t made a purchase yet—help a brother out!</span>
+          <span class="text-sm text-base-content/70 block mt-2">You haven’t made a purchase yet—help a brother out!</span>
         {% endif %}
       </div>
       <div id="profile-edit-form"></div>
-      <div class="flex mt-6 space-x-4">
+      <div class="flex flex-col sm:flex-row gap-4 w-full justify-center mt-6">
         <a 
           href="{% url 'account_email' %}" 
-          class="inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white rounded-lg transition transform hover:scale-105"
+          class="btn btn-outline btn-primary w-full sm:w-auto"
         >
           Change Email
         </a>
         <a 
           href="{% url 'account_change_password' %}" 
-          class="inline-flex items-center px-4 py-2 text-sm font-semibold text-blue-400 border border-blue-400 hover:bg-blue-400 hover:text-white rounded-lg transition transform hover:scale-105"
+          class="btn btn-outline btn-primary w-full sm:w-auto"
         >
           Change Password
         </a>
         <a 
           href="{% url 'account_logout' %}" 
-          class="inline-flex items-center px-4 py-2 text-sm font-semibold text-white bg-blue-600 hover:bg-blue-700 rounded-lg transition transform hover:scale-105"
+          class="btn btn-primary w-full sm:w-auto"
         >
           Logout
         </a>
       </div>
       <button 
-        class="mt-4 text-red-400 hover:text-red-300 text-sm font-semibold"
+        class="mt-4 btn btn-ghost btn-sm text-error hover:text-error/80"
         hx-get="{% url 'profile_delete_confirm' %}" 
         hx-target="#delete-modal" 
         hx-swap="innerHTML"
       >
         Delete Account
       </button>
-      <div id="delete-modal" class="mt-4"></div>
+      <div id="delete-modal" class="mt-4 w-full"></div>
     </div>
   </div>
 </section>

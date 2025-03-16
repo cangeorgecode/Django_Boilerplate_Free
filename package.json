@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "daisyui": "^5.0.4",
     "kutty": "^0.6.0"
   }
 }

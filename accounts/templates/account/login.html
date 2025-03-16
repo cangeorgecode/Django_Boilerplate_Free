@@ -1,22 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
 
-<section class="px-4 py-24 mx-auto max-w-7xl min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-  <div class="w-full py-6 mx-auto md:w-3/5 lg:w-2/5">
-    <h1 class="mb-6 text-3xl font-bold text-white md:text-4xl md:leading-tight text-center">
+<section class="min-h-screen flex items-center justify-center px-4 py-24 mx-auto max-w-7xl bg-base-200">
+  <div class="w-full md:w-3/5 lg:w-2/5">
+    <h1 class="mb-6 text-3xl md:text-4xl font-bold text-center">
       Login
     </h1>
 
     <form class="mt-8 space-y-6" action="{% url 'account_login' %}" method="post" autocomplete="off">
       {% csrf_token %}
       {% if form.non_field_errors %}
-        <div class="text-red-400 text-sm">{{ form.non_field_errors }}</div>
+        <div class="text-error text-sm">{{ form.non_field_errors }}</div>
       {% endif %}
       
-      <label class="block" for="username">
-        <span class="block mb-2 text-sm font-medium text-gray-300">Email</span>
+      <div class="form-control">
+        <label class="label" for="username">
+          <span class="label-text">Email</span>
+        </label>
         <input 
-          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          class="input input-bordered w-full" 
           type="text" 
           id="username" 
           name="login" 
@@ -24,14 +26,16 @@
           required 
         />
         {% if form.login.errors %}
-          <div class="text-red-400 text-sm mt-1">{{ form.login.errors }}</div>
+          <div class="text-error text-sm mt-1">{{ form.login.errors }}</div>
         {% endif %}
-      </label>
+      </div>
 
-      <label class="block" for="password">
-        <span class="block mb-2 text-sm font-medium text-gray-300">Password</span>
+      <div class="form-control">
+        <label class="label" for="password">
+          <span class="label-text">Password</span>
+        </label>
         <input 
-          class="w-full px-4 py-3 bg-gray-700 text-gray-200 border border-gray-600 rounded-lg focus:outline-none focus:border-blue-400" 
+          class="input input-bordered w-full" 
           type="password" 
           id="password" 
           name="password" 
@@ -39,22 +43,23 @@
           required 
         />
         {% if form.password.errors %}
-          <div class="text-red-400 text-sm mt-1">{{ form.password.errors }}</div>
+          <div class="text-error text-sm mt-1">{{ form.password.errors }}</div>
         {% endif %}
-      </label>
+      </div>
       
-      <input 
+      <button 
         type="submit" 
-        class="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg transition transform hover:scale-105" 
-        value="Login" 
-      />
+        class="btn btn-primary w-full"
+      >
+        Login
+      </button>
     </form>
 
-    <p class="mt-6 text-sm text-center text-gray-400">
+    <p class="mt-6 text-sm text-center text-base-content/70">
       By clicking "Login" you agree to our
-      <a href="#" class="text-blue-400 hover:text-blue-300">Terms of Service</a>
+      <a href="#" class="link link-primary">Terms of Service</a>
       and
-      <a href="#" class="text-blue-400 hover:text-blue-300">Privacy Policy</a>.
+      <a href="#" class="link link-primary">Privacy Policy</a>.
     </p>
   </div>
 </section>
