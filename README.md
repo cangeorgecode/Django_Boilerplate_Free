@@ -31,6 +31,7 @@
 ## Features included  🔧
 
 ✅ Django, Tailwind + Kutty, HTMX  
+✅ Django, Tailwind + DaisyUI, HTMX (in the "daisy" branch of this repo)
 ✅ Wagtail CMS  
 ✅ User authentication (django-allauth)  
 ✅ Email verification  
