@@ -112,7 +112,7 @@ Hi, my name is George. 👋 I am a self-taught developer. I like coding and buil
 
 - [X](https://x.com/joji_jiji)
 - [Blog - No signup needed](https://joji.beehiiv.com/)
-- [Django + HTMX SaaS Boilerplate (Pro)](https://vibecodesaas.com)
+- [Django + HTMX SaaS Boilerplate (Pro) - $29 with extra features](https://vibecodesaas.com)
 
 &nbsp;
 
