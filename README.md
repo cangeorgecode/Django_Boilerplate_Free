@@ -5,12 +5,6 @@
 &nbsp;
 
 
-[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-yellow)](https://tally.so/r/mZD1Eo) **Other boilerplates cost $200+, would you pay $29 (one-off) for a premium version with extra features?** Takes 10 seconds! [Take the Survey](https://tally.so/r/mZD1Eo) 
-
-
-&nbsp;
-
-
 ### Django Boilerplate: 
 😎 Save Time (Skip 20+ hours of set up)  
 😎 Save Money (Already saved $999)  
@@ -57,7 +51,12 @@
 - CSV import/export
 - Stripe (one-off & subscriptions) payment
 
-[![Survey](https://img.shields.io/badge/Survey-Take%20it%20now!-yellow)](https://tally.so/r/mZD1Eo) **Other boilerplates cost $200+, would you pay $29 (one-off) for a premium version with extra features?** Takes 10 seconds! [Take the Survey](https://tally.so/r/mZD1Eo) 
+
+&nbsp;
+
+
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-yellow)](https://vibecodesaas.com/) **Other boilerplates cost $200+, so I am building one that doesn't break your wallet ($29 now, $69 when launch)** 👉 [Pro version](https://vibecodesaas.com/)
+
 
 &nbsp;
 
@@ -99,7 +98,7 @@ EMAIL_HOST_PASSWORD='add_your_password'
 
 ## Cost breakdown 💰
 
-- Hosting: $10/month (Get $60 credit on Linode with my referral link: https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
+- Hosting: $10/month (Get $60 credit on Linode with my [referral link](https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
 - Domain name: $60 (from Porkbun)
 - Django Boilerplate: $0  
 
@@ -111,10 +110,9 @@ EMAIL_HOST_PASSWORD='add_your_password'
 
 Hi, my name is George. 👋 I am a self-taught developer. I like coding and building things. Because I am working a 9 to 5, I need to be efficient with my time and money. I am sharing resources for free to help those who like to build things as well
 
-- X: https://x.com/joji_jiji
-- Blog: https://joji.beehiiv.com/ (no sign up needed)
-- My other products: https://www.producthunt.com/@superuserdev
-
+- [X](https://x.com/joji_jiji)
+- [Blog - No signup needed](https://joji.beehiiv.com/)
+- [Django + HTMX SaaS Boilerplate (Pro)](https://vibecodesaas.com)
 
 &nbsp;
 
