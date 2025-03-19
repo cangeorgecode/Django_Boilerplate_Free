@@ -38,7 +38,7 @@
 
 ## Features coming to the Pro version 🚧
 
-- Django Rest Framework for api
+- Django Rest Framework
 - Social media login
 - Posthog analytics
 - User management dashboard
