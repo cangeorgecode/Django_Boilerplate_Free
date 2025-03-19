@@ -36,7 +36,7 @@
 &nbsp;
 
 
-## Features coming soon 🚧
+## Features coming to the Pro version 🚧
 
 - Django Rest Framework for api
 - Social media login
@@ -55,7 +55,7 @@
 &nbsp;
 
 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-yellow)](https://vibecodesaas.com/) **Other boilerplates cost $200+, so I am building one that doesn't break your wallet ($29 now, $69 when launch)** 👉 [Pro version](https://vibecodesaas.com/)
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) **Other boilerplates cost $200+, so I am building one that doesn't break your wallet ($29 now, $69 when launch)** 👉 [Pro version](https://vibecodesaas.com/)
 
 
 &nbsp;
