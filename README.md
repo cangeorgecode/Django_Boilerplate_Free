@@ -1,5 +1,5 @@
 # Django + HTMX Boilerplate for SaaS | Free, setup in 15 mins 🚀🚀
-### Are you a developer who's tight on time and budget? 🤔 Introducing Django Boilerplate that helped me build 4 apps in 2 months while working a 9 to 5! 🎉   
+### Existing boilerplates are too expensive, so I built my own. Sharing it for free 🎉     
 
 
 &nbsp;
