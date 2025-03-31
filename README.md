@@ -1,5 +1,12 @@
 # Django + HTMX Boilerplate for SaaS | Free, setup in 15 mins 🚀🚀
-### Existing boilerplates are too expensive, so I built my own. Sharing it for free 🎉     
+### Existing boilerplates are too expensive, so I built my own. Sharing it for free 🎉    
+
+
+&nbsp;
+
+
+### A Pro version ($29) also exists. Don't pay $200+ for a boilerplate. 
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) **Make boilerplates affordable again!** 👉 [Pro version](https://vibecodesaas.com/)
 
 
 &nbsp;
@@ -50,12 +57,6 @@
 - Docker setup
 - CSV import/export
 - Stripe (one-off & subscriptions) payment
-
-
-&nbsp;
-
-
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) **Other boilerplates cost $200+, so I am building one that doesn't break your wallet ($29 now, $69 when launch)** 👉 [Pro version](https://vibecodesaas.com/)
 
 
 &nbsp;
@@ -112,7 +113,7 @@ Hi, my name is George. 👋 I am a self-taught developer. I like coding and buil
 
 - [X](https://x.com/joji_jiji)
 - [Blog - No signup needed](https://joji.beehiiv.com/)
-- [Django + HTMX SaaS Boilerplate (Pro) - $29 with extra features](https://vibecodesaas.com)
+- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) [Make boilerplates affordable again!](https://vibecodesaas.com)
 
 &nbsp;
 
