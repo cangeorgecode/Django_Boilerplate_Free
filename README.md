@@ -1,12 +1,11 @@
 # Django + HTMX Boilerplate for SaaS | Free, setup in 15 mins 🚀🚀
-### Existing boilerplates are too expensive, so I built my own. Sharing it for free 🎉    
+### I raged and smashed 3 keyboards building this, so you don't have to 🎉 
 
 
 &nbsp;
 
 
-### A Pro version ($29) also exists. Don't pay $200+ for a boilerplate. 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) **Make boilerplates affordable again!** 👉 [Pro version](https://vibecodesaas.com/)
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) **Make boilerplates affordable again!** 👉 [Pro version - $29](https://vibecodesaas.com/)
 
 
 &nbsp;
