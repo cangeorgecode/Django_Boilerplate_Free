@@ -69,12 +69,12 @@ cd <dir_name>
 source venv/bin/activate
 pip install -r requirements.txt
 python manage.py tailwind install
-npm i kutty --save
-python manage.py tailwind start
+cd theme/static_src
+npm i -D daisyui@latest
+cd ../..
+python manage.py tailwind build
 
-
-# Open another terminal or Ctrl + C
-python manage.py collectstatic # Type yes if prompted
+python manage.py collectstatic --noinput
 python manage.py migrate
 
 
