@@ -61,7 +61,9 @@
 &nbsp;
 
 
-## Setup 🧑‍💻
+## Setup 🧑‍💻  
+Run install.sh or manually install  
+
 
 ```
 git clone https://github.com/cangeorgecode/Django_Boilerplate_Free <dir_name>
