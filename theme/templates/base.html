@@ -3,74 +3,134 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>{% block title %}Django SaaS Boilerplate{% endblock %}</title>
+    <!-- Define character encoding and ensure responsiveness -->
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+    <!-- SEO: Dynamic title with primary keyword, under 60 chars -->
+    <title>{% block title %}Django SaaS Boilerplate | Scalable Web App{% endblock %}</title>
+
+    <!-- SEO: Dynamic meta description, under 160 chars, with call-to-action -->
+    <meta name="description" content="{% block meta_description %}Build scalable web apps with Django SaaS Boilerplate. Start your project today!{% endblock %}" />
+
+    <!-- SEO: Optional keywords meta tag for search engines -->
+    <meta name="keywords" content="{% block meta_keywords %}django, saas, boilerplate, web app, scalable, python{% endblock %}" />
+
+    <!-- SEO: Robots meta tag to control indexing -->
+    <meta name="robots" content="{% block meta_robots %}index, follow{% endblock %}" />
+
+    <!-- SEO: Canonical URL to prevent duplicate content issues -->
+    <link rel="canonical" href="{% block canonical_url %}{% url 'index' %}{% endblock %}" />
+
+    <!-- SEO: Open Graph tags for social media sharing -->
+    <meta property="og:title" content="{% block og_title %}Django SaaS Boilerplate{% endblock %}" />
+    <meta property="og:description" content="{% block og_description %}A scalable Django SaaS boilerplate for building modern web apps.{% endblock %}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{% block og_url %}{% url 'index' %}{% endblock %}" />
+    <meta property="og:image" content="{% static 'Your_logo.png' %}" />
+
+    <!-- SEO: Twitter Card tags for Twitter sharing -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="{% block twitter_title %}Django SaaS Boilerplate{% endblock %}" />
+    <meta name="twitter:description" content="{% block twitter_description %}Start building with Django SaaS Boilerplate today!{% endblock %}" />
+    <meta name="twitter:image" content="{% static 'Your_logo.png' %}" />
+
+    <!-- SEO: Structured data (JSON-LD) for WebSite schema, simplified without SearchAction -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Django SaaS Boilerplate",
+        "url": "{% url 'index' %}"
+      }
+    </script>
+
+    <!-- Optional: Organization schema to enhance branding and trust -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Django SaaS Boilerplate",
+        "url": "{% url 'index' %}",
+        "logo": "{% static 'Your_logo.png' %}",
+        "sameAs": [
+          "https://x.com/joji_jiji"
+        ]
+      }
+    </script>
+
+    <!-- Favicon for branding and UX -->
+    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}" />
+
+    <!-- Load Tailwind CSS and scripts -->
     {% tailwind_css %}
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
     <script src="{% static 'htmx.min.js' %}" defer></script>
     <script src="{% static 'index.js' %}" defer></script>
-    <link rel="icon" type="image/x-icon" href="{% static 'favicon.ico' %}">
+
+    <!-- Allow child templates to add additional scripts -->
     {% block scripts %}{% endblock scripts %}
   </head>
 
   <body class="min-h-screen flex flex-col bg-gradient-to-br from-gray-800 to-gray-900 text-gray-200">
     <header class="z-30 w-full px-4 py-6 bg-gray-900/80 backdrop-blur-sm">
       <div class="flex items-center justify-between mx-auto max-w-7xl">
-        <a href="{% url 'index' %}" title="Django Boilerplate" class="flex items-center">
-          <img src="{% static 'Your_logo.png' %}" class="h-10" alt="Django Boilerplate" />
-          <span class="ml-2 text-xl font-bold text-white">{% block header_logo_text %}Django Boilerplate{% endblock %}</span>
+        <!-- SEO: H1 for logo text, only one per page, includes primary keyword -->
+        <a href="{% url 'index' %}" title="Django SaaS Boilerplate" class="flex items-center">
+          <img src="{% static 'Your_logo.png' %}" class="h-10" alt="Django SaaS Boilerplate Logo" loading="lazy" />
+          <h1 class="ml-2 text-xl font-bold text-white">{% block header_logo_text %}Django SaaS Boilerplate{% endblock %}</h1>
         </a>
-        <div class="flex items-center space-x-4">
+        <nav class="flex items-center space-x-4" aria-label="Main navigation">
+          <!-- SEO: Descriptive anchor text for internal links -->
           <div class="hidden space-x-4 md:inline-flex">
-            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Features</a>
-            <a href="{% url 'pricing' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition">Pricing</a>
-            <a href="/blog/" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Blog</a>
-            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Company</a>
+            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition" title="Explore Features">Features</a>
+            <a href="{% url 'pricing' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition" title="View Pricing Plans">Pricing</a>
+            <a href="/blog/" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition" title="Read Our Blog">Blog</a>
+            <a href="#" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition" title="About Our Company">Company</a>
             {% if user.is_authenticated %}
-            <a href="{% url 'profile' %}" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Profile</a>
-            <a href="{% url 'account_logout' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition">Logout</a>
+            <a href="{% url 'profile' %}" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition" title="View Your Profile">Profile</a>
+            <a href="{% url 'account_logout' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition" title="Log Out">Logout</a>
             {% else %}
-            <a href="{% url 'account_signup' %}" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition">Register</a>
-            <a href="{% url 'account_login' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition">Sign In</a>
+            <a href="{% url 'account_signup' %}" class="px-4 py-2 text-blue-400 hover:text-blue-300 font-semibold transition" title="Sign Up">Register</a>
+            <a href="{% url 'account_login' %}" class="px-4 py-2 bg-blue-600 text-white hover:bg-blue-700 rounded-lg font-semibold transition" title="Log In">Sign In</a>
             {% endif %}
           </div>
+          <!-- Mobile menu with accessibility improvements -->
           <div class="inline-flex md:hidden" x-data="{ open: false }">
-            <button class="flex-none px-2 text-blue-400 hover:text-blue-300" @click="open = true">
+            <button class="flex-none px-2 text-blue-400 hover:text-blue-300" @click="open = true" aria-label="Open Menu" aria-expanded="false" x-bind:aria-expanded="open">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-6 h-6">
                 <line x1="3" y1="12" x2="21" y2="12"></line>
                 <line x1="3" y1="6" x2="21" y2="6"></line>
                 <line x1="3" y1="18" x2="21" y2="18"></line>
               </svg>
-              <span class="sr-only">Open Menu</span>
             </button>
             <div class="absolute top-0 left-0 right-0 z-50 flex flex-col p-4 mt-16 bg-gray-900 rounded-lg shadow-lg" x-show.transition="open" @click.away="open = false" x-cloak>
-              <button class="self-end text-gray-400 hover:text-gray-200" @click="open = false">
+              <button class="self-end text-gray-400 hover:text-gray-200" @click="open = false" aria-label="Close Menu">
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <line x1="18" y1="6" x2="6" y2="18"></line>
                   <line x1="6" y1="6" x2="18" y2="18"></line>
                 </svg>
-                <span class="sr-only">Close Menu</span>
               </button>
-              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Features</a>
-              <a href="{% url 'pricing' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Pricing</a>
-              <a href="/blog/" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Blog</a>
-              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Company</a>
+              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="Explore Features">Features</a>
+              <a href="{% url 'pricing' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="View Pricing Plans">Pricing</a>
+              <a href="/blog/" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="Read Our Blog">Blog</a>
+              <a href="#" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="About Our Company">Company</a>
               {% if user.is_authenticated %}
-              <a href="{% url 'profile' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Profile</a>
-              <a href="{% url 'account_logout' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Logout</a>
+              <a href="{% url 'profile' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="View Your Profile">Profile</a>
+              <a href="{% url 'account_logout' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="Log Out">Logout</a>
               {% else %}
-              <a href="{% url 'account_signup' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Register</a>
-              <a href="{% url 'account_login' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold">Sign In</a>
+              <a href="{% url 'account_signup' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="Sign Up">Register</a>
+              <a href="{% url 'account_login' %}" class="py-2 text-blue-400 hover:text-blue-300 font-semibold" title="Log In">Sign In</a>
               {% endif %}
             </div>
           </div>
-        </div>
+        </nav>
       </div>
     </header>
 
-    <div class="flex-grow">
+    <main class="flex-grow">
+      <!-- SEO: Display user messages with accessibility -->
       {% if messages %}
         {% for message in messages %}
           <div class="p-4">
@@ -84,32 +144,29 @@
                 <div class="flex-1">
                   <p class="mt-1 text-sm text-gray-300">{{ message }}</p>
                 </div>
-                <button class="text-gray-400 hover:text-gray-200 transition" onclick="this.parentElement.parentElement.remove()">
+                <button class="text-gray-400 hover:text-gray-200 transition" onclick="this.parentElement.parentElement.remove()" aria-label="Dismiss notification">
                   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                   </svg>
-                  <span class="sr-only">Dismiss popup</span>
                 </button>
               </div>
             </div>
           </div>
         {% endfor %}
       {% endif %}
+      <!-- Content block for child templates -->
       {% block content %}{% endblock content %}
-    </div>
+    </main>
 
-    
     <footer>
-      <div
-        class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between"
-      >
-        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-          >Built with 🫶 by <a href="https://x.com/joji_jiji" target="_blank">George</a>
+      <div class="w-full mx-auto max-w-screen-xl p-4 md:flex md:items-center md:justify-between">
+        <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+          Built with 🫶 by <a href="https://x.com/joji_jiji" target="_blank" rel="noopener noreferrer" title="Follow George on X">George</a>
         </span>
-        <div class="flex space-x-6">
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">Terms</a>
-          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold">Privacy</a>
-        </div>
+        <nav class="flex space-x-6" aria-label="Footer navigation">
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold" title="Terms of Service">Terms</a>
+          <a href="#" class="text-blue-400 hover:text-blue-300 font-semibold" title="Privacy Policy">Privacy</a>
+        </nav>
       </div>
     </footer>
   </body>
