@@ -18,7 +18,7 @@
     "@tailwindcss/forms": "^0.5.7",
     "@tailwindcss/typography": "^0.5.10",
     "cross-env": "^7.0.3",
-    "daisyui": "^5.0.19",
+    "daisyui": "^5.0.35",
     "postcss": "^8.4.32",
     "postcss-import": "^15.1.0",
     "postcss-nested": "^6.0.1",

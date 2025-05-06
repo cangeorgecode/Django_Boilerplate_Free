@@ -53,6 +53,7 @@ INSTALLED_APPS = [
     'modelcluster',
     'taggit',
     'accounts.apps.AccountsConfig',
+    'jesus',
 ]
 
 TAILWIND_APP_NAME = 'theme'
