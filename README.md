@@ -1,5 +1,4 @@
-# Django + HTMX Boilerplate for Web Apps 🚀🚀
-### Build apps, make money, bring home the honey!! 🎉 
+# Django + HTMX Boilerplate for Web Apps 🚀 | Build apps, make money, bring home the honey!! 🎉 
 
 
 &nbsp;
@@ -14,11 +13,11 @@
 ## WHAT'S IN THE PAID VERSION!?!?!?!?! 🚧
 
 ✅ E-commerce site with Stripe to make money!  
-✅ Subscription/membership web apps to make more money!!   
-✅ Lead Magnet + Email List Builder to make even more money!!!   
-✅ Business website with a simple contact form to attract clients!!!!   
-✅ 100+ Premium Professional Tailwind Templates, no need to design!!!!!   
-✅ Super easy installation   
+✅ Subscription/membership web apps to make more money!!  
+✅ Lead Magnet + Email List Builder to make even more money!!!  
+✅ Business website with a simple contact form to attract clients!!!!  
+✅ 100+ Premium Professional Tailwind Templates, no need to design!!!!!  
+✅ Super easy installation  
 ✅ Unlimited projects!  
 ✅ Access for life!! (not sure what would happen after I died)  
 ✅ BUY ONCE, USE FOREVER!!!  
