@@ -1,11 +1,11 @@
 # Django + HTMX Boilerplate for Web Apps 🚀🚀
-### Free boilerplate code to help you monetize quickly  🎉 
+### Build apps, make money, bring home the honey!! 🎉 
 
 
 &nbsp;
 
 
-[![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)  
+[![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 MORE App Templates to make M0N3Y 🤑🤑** 👉 [Check It Out!](https://hero.codes/)  
 
 
 &nbsp;
@@ -112,7 +112,7 @@ Hi, my name is George. 👋 I taught myself python, django, bash, how to use Lin
 2. Monetize
 
 - [X](https://x.com/joji_jiji)
-- [![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
+- [![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 MORE App Templates to make M0N3Y 🤑🤑** 👉 [Check It Out!](https://hero.codes/)  
 
 &nbsp;
 
