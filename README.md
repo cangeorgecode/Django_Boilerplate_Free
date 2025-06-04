@@ -1,4 +1,5 @@
-# Django + HTMX Boilerplate for Web Apps 🚀 | Build apps, make money, bring home the honey!! 🎉 
+# Django + HTMX Boilerplate for Web Apps 🚀
+### Build apps, make money, bring home the honey!! 🎉 
 
 
 &nbsp;
