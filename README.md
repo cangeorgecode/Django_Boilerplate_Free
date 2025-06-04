@@ -7,6 +7,10 @@
 
 [![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)  
 
+
+&nbsp;
+
+
 ## WHAT'S IN THE PAID VERSION!?!?!?!?! 🚧
 
 ✅ E-commerce site with Stripe integration because we all want to make money!  
