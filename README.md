@@ -5,7 +5,7 @@
 &nbsp;
 
 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **App Template to make money** 👉 [Check It Out!](https://hero.codes/)
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
 
 
 &nbsp;
@@ -123,7 +123,7 @@ Hi, my name is George. 👋 I am a self-taught developer. I love to dabble in th
 I noticed I need to do this quickly and efficiently, so I built this code template. 
 
 - [X](https://x.com/joji_jiji)
-- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **App Template to make money** 👉 [Check It Out!](https://hero.codes/)
+- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
 
 &nbsp;
 
