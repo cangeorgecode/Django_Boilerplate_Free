@@ -1,11 +1,11 @@
 # Django + HTMX Boilerplate for Web Apps 🚀🚀
-### I am on a mission to monetize as many web apps as I can. I need to build quickly, efficiently, so I created this template to skip all the boring set ups 🎉 
+### I am on a mission to monetize as many web apps as I can.  🎉 
 
 
 &nbsp;
 
 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **I built more web app templates!** 👉 [Click Me!](https://hero.codes/)
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **E-commerce, Subscription, Lead Magnet Code** 👉 [Click Me!](https://hero.codes/)
 
 
 &nbsp;
@@ -123,7 +123,7 @@ Hi, my name is George. 👋 I am a self-taught developer. I love to dabble in th
 I noticed I need to do this quickly and efficiently, so I built this code template. 
 
 - [X](https://x.com/joji_jiji)
-- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **I built more web app templates!** 👉 [BUY ME STUFF!](https://hero.codes/)
+- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **E-commerce, Subscription, Lead Magnet Code** 👉 [Click Me!](https://hero.codes/)
 
 &nbsp;
 
