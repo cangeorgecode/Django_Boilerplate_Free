@@ -5,9 +5,9 @@
 &nbsp;
 
 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)  
+[![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)  
 
-## WHAT'S IN THE PAID VERSION!?!?!?!?!?! 🚧
+## WHAT'S IN THE PAID VERSION!?!?!?!?! 🚧
 
 ✅ E-commerce site with Stripe integration because we all want to make money!  
 ✅ Code template for subscription/membership web apps - build your community!!  
@@ -108,7 +108,7 @@ Hi, my name is George. 👋 I taught myself python, django, bash, how to use Lin
 2. Monetize
 
 - [X](https://x.com/joji_jiji)
-- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
+- [![Paid](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
 
 &nbsp;
 
