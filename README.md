@@ -42,15 +42,15 @@
 
 ## WHAT'S IN THE PAID VERSION!?!?!?!?!?! 🚧
 
-✅ E-commerce site with Stripe integration because we all want to make money!
-✅ Code template for subscription/membership web apps - build your community!!
-✅ Template for building email list with a lead magnet!!!
-✅ Business website with a simple contact form
-✅ 100+ Premium Professional Tailwind Templates, so you don't need to design jack!!!!
-✅ Super easy installation 
-✅ Build unlimited projects!
-✅ Access for life!! (not sure what would happen after I died)
-✅ BUY ONCE, USE FOREVER!!!
+✅ E-commerce site with Stripe integration because we all want to make money!  
+✅ Code template for subscription/membership web apps - build your community!!  
+✅ Template for building email list with a lead magnet!!!  
+✅ Business website with a simple contact form  
+✅ 100+ Premium Professional Tailwind Templates, so you don't need to design jack!!!!  
+✅ Super easy installation   
+✅ Build unlimited projects!  
+✅ Access for life!! (not sure what would happen after I died)  
+✅ BUY ONCE, USE FOREVER!!!  
 
 
 &nbsp;
@@ -114,13 +114,10 @@ EMAIL_HOST_PASSWORD='add_your_password'
 
 ## Contact me 📧
 
-Hi, my name is George. 👋 I am a self-taught developer. I love to dabble in the terminal. I taught myself python, django, bash, how to use Linux, while working a 9 to 5 (Damn! I am good!). I love doing this! My mission is simple:  
+Hi, my name is George. 👋 I taught myself python, django, bash, how to use Linux, while working a 9 to 5 (Damn! I am good!). I love to dabble in the terminal. I love doing this! My mission is simple:  
 
 1. Build as many web apps as quickly as I can
-2. Run $20 Reddit ads
-3. Monetize or move on to another project
-
-I noticed I need to do this quickly and efficiently, so I built this code template. 
+2. Monetize
 
 - [X](https://x.com/joji_jiji)
 - [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
@@ -128,6 +125,6 @@ I noticed I need to do this quickly and efficiently, so I built this code templa
 &nbsp;
 
 
-P.S. Consider giving me a star ⭐ if you find this helpful, cheers! 🍻
+P.S. Can I get a star ⭐ please? 🍻
 
 
