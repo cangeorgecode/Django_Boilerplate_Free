@@ -1,19 +1,17 @@
-# Django + HTMX Boilerplate for SaaS | Free, setup in 15 mins 🚀🚀
-### I raged and smashed 3 keyboards building this, so you don't have to 🎉 
+# Django + HTMX Boilerplate for Web Apps 🚀🚀
+### I am on a mission to monetize as many web apps as I can. I need to build quickly, efficiently, so I created this template to skip all the boring set ups 🎉 
 
 
 &nbsp;
 
 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) **Make boilerplates affordable again!** 👉 [Pro version - $29](https://vibecodesaas.com/)
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **I built more web app templates!** 👉 [Click Me!](https://hero.codes/)
 
 
 &nbsp;
 
 
 ### Django Boilerplate: 
-😎 Save Time (Skip 20+ hours of set up)  
-😎 Save Money (Already saved $999)  
 😎 Free forever  
 😎 Unlimited projects  
 😎 Instant Access  
@@ -30,40 +28,46 @@
 
 ## Features included  🔧
 
-✅ Django, Tailwind + Kutty, HTMX  
-✅ Django, Tailwind + DaisyUI, HTMX (in the "daisy" branch of this repo)  
+✅ Django, Tailwind + DaisyUI, HTMX
 ✅ Wagtail CMS  
 ✅ User authentication (django-allauth)  
 ✅ Email verification  
 ✅ Landing page template optimized for conversion  
 ✅ Django admin panel  
+✅ Install.sh for eazy installation!!!! 
 
 
 &nbsp;
 
 
-## Features coming to the Pro version 🚧
+## WHAT'S IN THE PAID VERSION!?!?!?!?!?! 🚧
 
-- Django Rest Framework
-- Social media login
-- Posthog analytics
-- User management dashboard
-- Email template
-- Sentry logging
-- Multi-tenancy
-- Deployment script
-- Redis, Celery integration
-- Docker setup
-- CSV import/export
-- Stripe (one-off & subscriptions) payment
+✅ E-commerce site with Stripe integration because we all want to make money!
+✅ Code template for subscription/membership web apps - build your community!!
+✅ Template for building email list with a lead magnet!!!
+✅ Business website with a simple contact form
+✅ 100+ Premium Professional Tailwind Templates, so you don't need to design jack!!!!
+✅ Super easy installation 
+✅ Build unlimited projects!
+✅ Access for life!! (not sure what would happen after I died)
+✅ BUY ONCE, USE FOREVER!!!
 
 
 &nbsp;
 
 
-## Setup 🧑‍💻  
-Run install.sh or manually install  
+## Setup (Easy) 🧑‍💻  
+```
+chmod +x install.sh (trust me, bruh)
+./install.sh
 
+```
+
+
+&nbsp;
+
+
+# Setup (Hard) 🧑‍💻  
 
 ```
 git clone https://github.com/cangeorgecode/Django_Boilerplate_Free <dir_name>
@@ -110,11 +114,16 @@ EMAIL_HOST_PASSWORD='add_your_password'
 
 ## Contact me 📧
 
-Hi, my name is George. 👋 I am a self-taught developer. I like coding and building things. Because I am working a 9 to 5, I need to be efficient with my time and money. I am sharing resources for free to help those who like to build things as well
+Hi, my name is George. 👋 I am a self-taught developer. I love to dabble in the terminal. I taught myself python, django, bash, how to use Linux, while working a 9 to 5 (Damn! I am good!). I love doing this! My mission is simple:  
+
+1. Build as many web apps as quickly as I can
+2. Run $20 Reddit ads
+3. Monetize or move on to another project
+
+I noticed I need to do this quickly and efficiently, so I built this code template. 
 
 - [X](https://x.com/joji_jiji)
-- [Blog - No signup needed](https://joji.beehiiv.com/)
-- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://vibecodesaas.com/) [Make boilerplates affordable again!](https://vibecodesaas.com)
+- [![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **I built more web app templates!** 👉 [BUY ME STUFF!](https://hero.codes/)
 
 &nbsp;
 
