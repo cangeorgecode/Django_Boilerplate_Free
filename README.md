@@ -1,5 +1,5 @@
 # Django + HTMX Boilerplate for Web Apps 🚀🚀
-### I am on a mission to monetize as many web apps as I can.  🎉 
+### Free boilerplate code to help you monetize quickly  🎉 
 
 
 &nbsp;
