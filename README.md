@@ -5,40 +5,7 @@
 &nbsp;
 
 
-[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)
-
-
-&nbsp;
-
-
-### Django Boilerplate: 
-😎 Free forever  
-😎 Unlimited projects  
-😎 Instant Access  
-😎 Lifetime update  
-
-&nbsp;
-
-## What you get right out of the box:
-![Demo Video](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/main/output.gif)
-
-
-&nbsp;
-
-
-## Features included  🔧
-
-✅ Django, Tailwind + DaisyUI, HTMX
-✅ Wagtail CMS  
-✅ User authentication (django-allauth)  
-✅ Email verification  
-✅ Landing page template optimized for conversion  
-✅ Django admin panel  
-✅ Install.sh for eazy installation!!!! 
-
-
-&nbsp;
-
+[![Pro](https://img.shields.io/badge/Pro-Boilerplate-pink)](https://hero.codes/) **4 more App Templates to make money** 👉 [Check It Out!](https://hero.codes/)  
 
 ## WHAT'S IN THE PAID VERSION!?!?!?!?!?! 🚧
 
@@ -56,7 +23,31 @@
 &nbsp;
 
 
-## Setup (Easy) 🧑‍💻  
+## What's in the Free version (not as good as the paid version tho) 🔧
+
+✅ Django, Tailwind + DaisyUI, HTMX
+✅ Wagtail CMS  
+✅ User authentication (django-allauth)  
+✅ Email verification  
+✅ Landing page template optimized for conversion  
+✅ Django admin panel  
+✅ Install.sh for eazy installation!!!!  
+😎 Free forever  
+😎 Unlimited projects  
+😎 Instant Access  
+😎 Lifetime update   
+
+
+&nbsp;
+
+## This is what you are getting:
+![Demo Video](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/main/output.gif)
+
+
+&nbsp;
+
+
+# Setup (Easy) 🧑‍💻  
 ```
 chmod +x install.sh (trust me, bruh)
 ./install.sh
@@ -102,12 +93,9 @@ EMAIL_HOST_PASSWORD='add_your_password'
 &nbsp;
 
 
-## Cost breakdown 💰
+## Free Hosting on Linode 💰
 
 - Hosting: $10/month (Get $60 credit on Linode with my [referral link](https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
-- Domain name: $60 (from Porkbun)
-- Django Boilerplate: $0  
-
 
 &nbsp;
 
