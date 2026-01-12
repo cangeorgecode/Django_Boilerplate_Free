@@ -21,20 +21,32 @@ RUN pip install --no-cache-dir -U pip && \
 # Copy full project
 COPY . .
 
-# cd to where package.json + lockfile live
+# First, verify the theme directory structure
+RUN echo "=== Theme directory structure ===" && \
+    find /app/theme -type f -name "*.css" -o -name "*.js" -o -name "*.json" | sort && \
+    echo "=== Checking static_src directory ===" && \
+    ls -la /app/theme/static_src/
+
+# Ensure the theme app is properly configured
 WORKDIR /app/theme/static_src
 
+# Install npm dependencies
 RUN npm ci
 
-# Debug (keep for now)
-RUN echo "\n=== DEBUG in theme/static_src ===" && \
-    ls -la && \
-    echo "\n=== tailwind.config.js ===" && cat tailwind.config.js || echo "missing" && \
-    echo "\n=== Before build ===" && mkdir -p ../static/css/dist && ls -la ../static/css/dist/ && \
-    echo "\n=== Building Tailwind ===" && \
-    SECRET_KEY="dummy-for-build" python /app/manage.py tailwind build --no-input || echo "FAILED" && \
-    echo "\n=== After build ===" && ls -la ../static/css/dist/ && \
-    find /app -name "styles.css"
+# Create necessary directory for output
+RUN mkdir -p ../static/css/dist
+
+# Build Tailwind CSS
+RUN SECRET_KEY="dummy-for-build" \
+    DJANGO_SETTINGS_MODULE="proj.settings" \
+    python /app/manage.py tailwind build --no-input
+
+# Debug: Check what was built
+RUN echo "=== After tailwind build ===" && \
+    echo "Checking /app/theme/static/css/dist/:" && \
+    ls -la /app/theme/static/css/dist/ && \
+    echo "=== Full search for styles.css ===" && \
+    find /app -name "styles.css" -type f
 
 # ── Final stage: Runtime (no Node.js bloat)
 FROM python:3.13-slim
@@ -64,6 +76,10 @@ USER appuser
 
 # Collectstatic (now Django is installed → works)
 RUN python manage.py collectstatic --noinput --clear
+
+# Verify collected static files
+RUN echo "=== Checking collected static files ===" && \
+    find /app/staticfiles -name "*.css" -type f
 
 EXPOSE 8000
 
