@@ -1,0 +1,211 @@
+{% extends 'core/base.html' %}
+{% block content %}
+
+<!-- Hero Section - Above the Fold: Grab Attention in <5s -->
+<section class="hero min-h-screen bg-gradient-to-br from-base-200 via-base-100 to-base-300 relative overflow-hidden">
+  <div class="hero-content text-center px-6 py-32 max-w-5xl mx-auto">
+    <div class="space-y-8">
+      <h1 class="text-5xl md:text-7xl font-extrabold leading-tight bg-clip-text text-transparent bg-gradient-to-r from-primary to-secondary">
+        Unlock Lifetime Access to [Your Product Name]<br class="hidden md:block"> — One Payment, Forever Yours
+      </h1>
+      <p class="text-xl md:text-2xl text-base-content/80 max-w-3xl mx-auto">
+        Stop wasting time on [pain point]. Get instant, unlimited access to [key benefit] and start [desired outcome] today — no subscriptions, no recurring fees.
+      </p>
+
+      <!-- Prominent Buy CTA with Urgency + Social Proof -->
+      <div class="flex flex-col sm:flex-row justify-center gap-6 mt-10">
+        <form method="post" action="{% url 'home' %}">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-primary btn-lg px-12 py-6 text-xl shadow-xl hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105">
+            Buy Now — Only $99 (One-Time)
+          </button>
+        </form>
+        <div class="flex items-center gap-4 text-sm opacity-80">
+          <div class="badge badge-success gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Secure Payment</div>
+          <div class="badge badge-info gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Instant Access</div>
+        </div>
+      </div>
+
+      <!-- Trust Bar -->
+      <div class="flex flex-wrap justify-center gap-8 mt-12 text-sm opacity-70">
+        <div>Trusted by 1,200+ indie makers & devs</div>
+        <div>30-Day Money-Back Guarantee</div>
+        <div>Secure Stripe Checkout</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Social Proof / Stats - Build Credibility Early -->
+<section class="py-16 bg-base-200">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <div>
+        <div class="text-5xl font-bold text-primary">+1.2k</div>
+        <p class="text-base-content/70 mt-2">Happy Customers</p>
+      </div>
+      <div>
+        <div class="text-5xl font-bold text-primary">4.9/5</div>
+        <p class="text-base-content/70 mt-2">Average Rating</p>
+      </div>
+      <div>
+        <div class="text-5xl font-bold text-primary">100%</div>
+        <p class="text-base-content/70 mt-2">Satisfaction Guarantee</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Features / Benefits Section -->
+<section class="py-24 bg-base-100">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Why Thousands Choose This One-Time Deal</h2>
+    <div class="grid md:grid-cols-3 gap-10">
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-6xl mb-4">⚡</div>
+          <h3 class="card-title text-2xl">Instant Lifetime Access</h3>
+          <p class="text-base-content/70">Pay once, own forever. No monthly fees eating your profits.</p>
+        </div>
+      </div>
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-6xl mb-4">🔒</div>
+          <h3 class="card-title text-2xl">Full Source + Updates</h3>
+          <p class="text-base-content/70">Get the complete code + future updates included — forever.</p>
+        </div>
+      </div>
+      <div class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-6xl mb-4">🚀</div>
+          <h3 class="card-title text-2xl">Proven Results</h3>
+          <p class="text-base-content/70">Users report [specific result, e.g., 3x faster launches, $Xk saved].</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials - Social Proof Power -->
+<section class="py-24 bg-base-200">
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">What Real Users Are Saying</h2>
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src="https://ui-avatars.com/api/?name=Alex+Smith&background=6366f1&color=fff" alt="Alex" />
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">Alex S.</p>
+              <p class="text-sm opacity-70">Indie Hacker</p>
+            </div>
+          </div>
+          <p class="italic">"This single purchase saved me months of dev time. Worth every penny!"</p>
+        </div>
+      </div>
+      <!-- Repeat for 2-3 more testimonials -->
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src="https://ui-avatars.com/api/?name=Sarah+Lee&background=6366f1&color=fff" alt="Sarah" />
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">Sarah L.</p>
+              <p class="text-sm opacity-70">Freelancer</p>
+            </div>
+          </div>
+          <p class="italic">"Instant value. No subscriptions — finally a fair deal in SaaS!"</p>
+        </div>
+      </div>
+      <div class="card bg-base-100 shadow-xl">
+        <div class="card-body">
+          <div class="flex items-center gap-4 mb-4">
+            <div class="avatar">
+              <div class="w-12 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                <img src="https://ui-avatars.com/api/?name=Mark+Chen&background=6366f1&color=fff" alt="Mark" />
+              </div>
+            </div>
+            <div>
+              <p class="font-bold">Mark C.</p>
+              <p class="text-sm opacity-70">Startup Founder</p>
+            </div>
+          </div>
+          <p class="italic">"Launched my MVP in days instead of weeks. Game-changer."</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Pricing / Buy Section - Single Offer Focus -->
+<section class="py-24 bg-gradient-to-br from-primary/10 to-secondary/10">
+  <div class="max-w-4xl mx-auto px-6 text-center">
+    <h2 class="text-4xl md:text-5xl font-bold mb-8">One Simple Payment. Lifetime Value.</h2>
+    <div class="card bg-base-100 shadow-2xl max-w-2xl mx-auto">
+      <div class="card-body p-12">
+        <div class="text-7xl font-extrabold text-primary">$X9</div>
+        <p class="text-2xl mt-2 line-through opacity-50">$X99</p>
+        <p class="text-xl mt-6 font-semibold">One-Time Payment • Lifetime Access • Instant Download</p>
+        <div class="mt-10">
+          <a href="#" class="btn btn-primary btn-block btn-lg text-xl shadow-xl hover:shadow-2xl hover:shadow-primary/40">
+            Secure Your Copy Now
+          </a>
+        </div>
+        <div class="mt-6 text-sm opacity-70">
+          30-Day Money-Back Guarantee • Secure Stripe Checkout
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ - Address Objections -->
+<section class="py-24 bg-base-100">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-4xl md:text-5xl font-bold text-center mb-16">Got Questions?</h2>
+    <div class="space-y-4">
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="faq" checked="checked" />
+        <div class="collapse-title text-xl font-medium">Is this really lifetime access?</div>
+        <div class="collapse-content">
+          <p>Yes — pay once, own it forever. No subscriptions ever.</p>
+        </div>
+      </div>
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="faq" />
+        <div class="collapse-title text-xl font-medium">What do I get exactly?</div>
+        <div class="collapse-content">
+          <p>Full source code, documentation, future updates, and priority support.</p>
+        </div>
+      </div>
+      <div class="collapse collapse-arrow bg-base-200">
+        <input type="radio" name="faq" />
+        <div class="collapse-title text-xl font-medium">What if I'm not satisfied?</div>
+        <div class="collapse-content">
+          <p>30-day no-questions-asked refund. Your risk is zero.</p>
+        </div>
+      </div>
+      <!-- Add 2-3 more relevant FAQs -->
+    </div>
+  </div>
+</section>
+
+<!-- Final Urgent CTA -->
+<section class="py-32 text-center bg-gradient-to-br from-primary to-secondary text-primary-content">
+  <div class="max-w-4xl mx-auto px-6">
+    <h2 class="text-5xl md:text-6xl font-extrabold mb-8">Don't Miss Out — This Price Won't Last</h2>
+    <p class="text-2xl mb-12 opacity-90">Limited spots at this one-time rate. Secure yours before it's gone.</p>
+    <a href="#" class="btn btn-lg btn-neutral text-primary text-2xl px-16 py-8 shadow-2xl hover:shadow-4xl hover:shadow-black/30">
+      Buy Now — Lifetime Access for $X9
+    </a>
+  </div>
+</section>
+
+{% endblock content %}

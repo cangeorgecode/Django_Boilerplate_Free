@@ -1,0 +1,119 @@
+{% load static tailwind_tags %}
+{% load django_htmx %}
+
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Your SaaS Name — Modern & Powerful{% endblock %}</title>
+
+    {% tailwind_css %}
+
+    <!-- HTMX -->
+    {% htmx_script %}
+
+    <!-- Optional: Font for modern SaaS feel (Inter or similar) -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body class="min-h-screen flex flex-col bg-base-100 text-base-content antialiased font-sans">
+    <!-- Sticky Navbar – modern, clean, conversion-focused -->
+    <div class="navbar bg-base-100/80 backdrop-blur-md border-b border-base-300 sticky top-0 z-50 shadow-sm transition-all duration-300">
+        <div class="navbar-start">
+            <a href="{% url 'home' %}" class="btn btn-ghost text-2xl font-bold tracking-tight text-primary">
+                YourSaaS
+            </a>
+        </div>
+
+        <div class="navbar-center hidden lg:flex">
+            <ul class="menu menu-horizontal px-1 gap-2">
+                <li><a href="#" class="text-base-content/80 hover:text-primary">Pricing</a></li>
+                <!-- Add more links as needed -->
+            </ul>
+        </div>
+
+        <div class="navbar-end gap-3">
+            {% if user.is_authenticated %}
+                <div class="dropdown dropdown-end">
+                    <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+                        <div class="w-10 rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
+                            <!-- Use real avatar or placeholder -->
+                            <img alt="User avatar" src="https://ui-avatars.com/api/?name={{ user.username|urlencode }}&background=6366f1&color=fff" />
+                        </div>
+                    </div>
+                    <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow-lg bg-base-200 rounded-xl w-52">
+                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    </ul>
+                </div>
+            {% else %}
+                <a href="{% url 'account_login' %}" class="btn btn-ghost">Log in</a>
+                <a href="#" class="btn btn-primary shadow-md hover:shadow-lg hover:shadow-primary/30 transition-all">
+                    Get Started
+                </a>
+            {% endif %}
+
+            <!-- Mobile menu toggle -->
+            <div class="dropdown dropdown-end lg:hidden">
+                <div tabindex="0" role="button" class="btn btn-ghost btn-circle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                </div>
+                <ul tabindex="0" class="menu menu-sm dropdown-content mt-3 z-[1] p-4 shadow-xl bg-base-200 rounded-xl w-64">
+                    <li><a href="#">Pricing</a></li>
+                    {% if user.is_authenticated %}
+                        <li><a href="{% url 'dashboard' %}">Dashboard</a></li>
+                        <li><a href="{% url 'account_logout' %}">Logout</a></li>
+                    {% else %}
+                        <li><a href="{% url 'account_login' %}">Log in</a></li>
+                        <li><a href="#" class="btn btn-primary btn-block mt-2">Get Started</a></li>
+                    {% endif %}
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content with better padding -->
+    <main class="flex-1 container mx-auto px-6 py-12 max-w-7xl">
+        <!-- Global messages with daisyUI alerts -->
+        {% if messages %}
+            <div class="max-w-3xl mx-auto mb-10 space-y-4">
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }} shadow-lg rounded-xl">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <span>{{ message }}</span>
+                    </div>
+                {% endfor %}
+            </div>
+        {% endif %}
+
+        {% block content %}{% endblock %}
+    </main>
+
+    <!-- Modern Footer – clean & conversion-supportive -->
+    <footer class="footer footer-center p-10 bg-base-200 text-base-content border-t border-base-300">
+        <nav class="grid grid-flow-col gap-8 text-lg">
+            <a href="{% url 'home' %}" class="link link-hover hover:text-primary transition-colors">Home</a>
+            <a href="#" class="link link-hover hover:text-primary transition-colors">Pricing</a>
+            <a href="{% url 'terms' %}" class="link link-hover hover:text-primary transition-colors">Terms</a>
+            <a href="{% url 'privacy' %}" class="link link-hover hover:text-primary transition-colors">Privacy</a>
+        </nav>
+
+        <nav>
+            <div class="grid grid-flow-col gap-6 text-3xl">
+                <a href="#" class="hover:text-primary transition-colors"><i class="fab fa-x-twitter"></i></a>
+                <a href="#" class="hover:text-primary transition-colors"><i class="fab fa-github"></i></a>
+                <!-- Add more if needed -->
+            </div>
+        </nav>
+
+        <aside class="text-sm opacity-70 mt-4">
+            <p>© {% now "Y" %} YourSaaS — Built for indie hackers & serious builders</p>
+        </aside>
+    </footer>
+</body>
+</html>

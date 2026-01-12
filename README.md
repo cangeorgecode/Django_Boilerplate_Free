@@ -1,100 +1,63 @@
-# Django + HTMX Boilerplate for Web Apps 🚀
-### Build apps, make money, bring home the honey!! 🎉 
+# Django Micro-SaaS Boilerplate 🚀
+### Building a portfolio of micro saas, so that I can spend time with family while still be able to provide financially 🎉 
 
 
 &nbsp;
 
 
-[![Paid](https://img.shields.io/badge/Paid-Boilerplate-pink)](https://hero.codes/) **4 MORE App Templates to make M0N3Y 🤑🤑** 👉 [Check It Out!](https://hero.codes/)  
+## The Stack (No Javascript)
+
+✅ Django  
+✅ Tailwind + DaisyUI  
+✅ HTMX  
+✅ Stripe (one off payment)  
+✅ Django-allauth  
+✅ Postgresql  
+✅ Docker  
+✅ Landing page optimized for conversion    
 
 
 &nbsp;
 
 
-## WHAT'S IN THE PAID VERSION!?!?!?!?! 🚧
+## Installation
 
-✅ E-commerce site with Stripe to make money!  
-✅ Subscription/membership web apps to make more money!!  
-✅ Lead Magnet + Email List Builder to make even more money!!!  
-✅ Business website with a simple contact form to attract clients!!!!  
-✅ 100+ Premium Professional Tailwind Templates, no need to design!!!!!  
-✅ Super easy installation  
-✅ Unlimited projects!  
-✅ Access for life!! (not sure what would happen after I died)  
-✅ BUY ONCE, USE FOREVER!!!  
+This project is designed to run with **Docker** — the fastest and most reliable way to get everything working, including PostgreSQL, without installing Python, PostgreSQL, or any dependencies on your machine.
 
+### Prerequisites
 
-&nbsp;
+- **Docker** (with Docker Compose) installed  
+  - Windows / macOS: Download from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
+  - Linux: Follow your distro guide (e.g. `sudo apt install docker.io docker-compose` on Ubuntu)
+- **Git** installed
 
+**Note:** You do **not** need to install Python, PostgreSQL, Node.js, or any other tools locally — Docker handles everything.
 
-## What's in the Free version (not as good as the paid version tho) 🔧
+### Step-by-Step Setup
 
-✅ Django, Tailwind + DaisyUI, HTMX
-✅ Wagtail CMS  
-✅ User authentication (django-allauth)  
-✅ Email verification  
-✅ Landing page template optimized for conversion  
-✅ Django admin panel  
-✅ Install.sh for eazy installation!!!!  
-😎 Free forever  
-😎 Unlimited projects  
-😎 Instant Access  
-😎 Lifetime update   
+1. **Clone the repository**
+   ```bash
+   git clone https://github.com/yourusername/your-saas-boilerplate.git
+   cd your-saas-boilerplate
 
+2. **Create and configure the environment file**  
+    ```bash
+    cp .env.example .env
+    ```
 
-&nbsp;
+3. **Start the application**  
+    ```bash
+    docker compose up --build
+    ```
 
-## This is what you are getting:
-![Demo Video](https://raw.githubusercontent.com/cangeorgecode/djbp_demo_video/main/output.gif)
+4. **Apply database migrations & create superuser**
+    ```bash
+    docker compose exec web python manage.py migrate
+    docker compose exec web python manage.py createsuperuser
+    ```  
 
-
-&nbsp;
-
-
-# Setup (Easy) 🧑‍💻  
-```
-chmod +x install.sh (trust me, bruh)
-./install.sh
-
-```
-
-
-&nbsp;
-
-
-# Setup (Hard) 🧑‍💻  
-
-```
-git clone https://github.com/cangeorgecode/Django_Boilerplate_Free <dir_name>
-cd <dir_name>
-source venv/bin/activate
-pip install -r requirements.txt
-python manage.py tailwind install
-cd theme/static_src
-npm i -D daisyui@latest
-cd ../..
-python manage.py tailwind build
-
-python manage.py collectstatic --noinput
-python manage.py migrate
-
-
-# Check that everything is running
-python manage.py runserver
-
-
-# Create an .env file
-touch .env
-
-
-# Add your email host and password to .env
-EMAIL_HOST_USER='add_your_email'
-EMAIL_HOST_PASSWORD='add_your_password'
-
-```
-
-
-&nbsp;
+5. **Open the app**
+    Go to: http://localhost:8000
 
 
 ## Free Hosting on Linode 💰

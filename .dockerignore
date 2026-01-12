@@ -1,0 +1,54 @@
+# Python cache and compiled files
+__pycache__/
+*.py[cod]
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Django files
+*.sqlite3
+*.sqlite3-journal
+db.sqlite3
+db.sqlite3-journal
+media/
+staticfiles/
+collected_static/
+
+# Environment and secrets
+.env
+.env.*
+*.env.local
+.env.development
+.env.production
+
+# Git
+.git
+.gitignore
+
+# Docker files (prevent copying into image)
+Dockerfile
+docker-compose.yml
+docker-compose.yaml
+compose.yml
+compose.yaml
+*.dockerignore
+
+# Editor / OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Build and temporary files
+build/
+dist/
+*.egg-info/
+htmlcov/
+.coverage
+coverage.xml
+.tox/
+.pytest_cache/
+.mypy_cache/
