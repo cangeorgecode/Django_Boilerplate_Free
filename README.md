@@ -1,5 +1,13 @@
 # Django Micro-SaaS Boilerplate 🚀
-### Building a portfolio of micro saas, so that I can spend time with family while still be able to provide financially 🎉 
+### Building a portfolio of micro saas, so that I can spend time with family while still be able to provide financially 🎉  
+
+Hi, I'm George — a self-taught developer with a dream. Like many of us, I got tired of the soul-sucking 9-5 grind stealing time from my family.  
+
+So, I started building a portfolio of micro-SaaS to generate passive-ish income. The more I ship, the closer I get to financial freedom and more family moments.  
+
+This boilerplate lays the foundation to build saas as efficiently as possible. Plug in your API keys, customize and ship. It has helped me saved hours setting up Stripe and authentication (which I think are the hardest).  
+
+A paid version of this boilerplate supporting Stripe subscription payment is coming soon
 
 
 &nbsp;
@@ -22,16 +30,18 @@
 
 ## Installation
 
-This project is designed to run with **Docker** — the fastest and most reliable way to get everything working, including PostgreSQL, without installing Python, PostgreSQL, or any dependencies on your machine.
+This project is designed to run with **Docker**
 
 ### Prerequisites
 
 - **Docker** (with Docker Compose) installed  
   - Windows / macOS: Download from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
   - Linux: Follow your distro guide (e.g. `sudo apt install docker.io docker-compose` on Ubuntu)
-- **Git** installed
 
 **Note:** You do **not** need to install Python, PostgreSQL, Node.js, or any other tools locally — Docker handles everything.
+
+&nbsp;
+
 
 ### Step-by-Step Setup
 
@@ -57,22 +67,25 @@ This project is designed to run with **Docker** — the fastest and most reliabl
     ```  
 
 5. **Open the app**
-    Go to: http://localhost:8000
+    Go to: http://localhost:8000  
+
+
+&nbsp;
+
+## Why you shouldn't use this  
+
+
 
 
 ## Free Hosting on Linode 💰
 
 - Hosting: $10/month (Get $60 credit on Linode with my [referral link](https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
 
+
 &nbsp;
 
 
 ## Contact me 📧
-
-Hi, my name is George. 👋 I taught myself python, django, bash, how to use Linux, while working a 9 to 5 (Damn! I am good!). I love to dabble in the terminal. I love doing this! My mission is simple:  
-
-1. Build as many web apps as quickly as I can
-2. Monetize
 
 - [X](https://x.com/joji_jiji)
 - [![Paid](https://img.shields.io/badge/Paid-Boilerplate-pink)](https://hero.codes/) **4 MORE App Templates to make M0N3Y 🤑🤑** 👉 [Check It Out!](https://hero.codes/)  
@@ -80,6 +93,6 @@ Hi, my name is George. 👋 I taught myself python, django, bash, how to use Lin
 &nbsp;
 
 
-P.S. Can I get a star ⭐ please? 🍻
+P.S. If you like my project, a ⭐ would mean a lot to me, cheers! 🍻
 
 
