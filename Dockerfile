@@ -1,4 +1,4 @@
-# ── Builder stage ───────────────────────────────────────
+# ── Builder stage: Install Node.js + build Tailwind ─────────────────────────────
 FROM python:3.13-slim AS builder
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -6,15 +6,44 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# Install Node.js (required for django-tailwind's npm-based build)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc libc-dev \
+    curl gnupg ca-certificates \
+    && curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs \
     && rm -rf /var/lib/apt/lists/*
 
+# Copy & install Python deps first (cache layer)
 COPY requirements.txt .
 RUN pip install --no-cache-dir -U pip && \
-    pip wheel --no-cache-dir --wheel-dir /wheels -r requirements.txt
+    pip install --no-cache-dir -r requirements.txt
 
-# ── Final stage ─────────────────────────────────────────
+# Copy full project (includes tailwind.config.js, package.json, theme/, etc.)
+COPY . .
+
+# IMPORTANT: cd into the Tailwind npm directory where package.json & lockfile live
+WORKDIR /app/theme/static_src
+
+# Install npm dependencies (tailwind, postcss, etc.)
+RUN npm ci
+
+# === DEBUG: Helpful output to verify setup during build (keep for now) ===
+RUN echo "\n=== DEBUG: Project structure around theme ===" && \
+    find . -path "./theme" -type d -print && \
+    echo "\n=== Files in theme/static_src/ ===" && \
+    ls -la theme/static_src/ || echo "theme/static_src/ not found" && \
+    echo "\n=== tailwind.config.js location and content ===" && \
+    find . -name "tailwind.config.js" -exec cat {} \; || echo "tailwind.config.js not found" && \
+    echo "\n=== Before build: theme/static/css/dist/ ===" && \
+    mkdir -p theme/static/css/dist && ls -la theme/static/css/dist/ && \
+    echo "\n=== RUNNING: python manage.py tailwind build ===" && \
+    SECRET_KEY="dummy-for-build" python manage.py tailwind build --no-input || echo "tailwind build FAILED" && \
+    echo "\n=== After build: theme/static/css/dist/ ===" && \
+    ls -la theme/static/css/dist/ || echo "dist dir still missing/empty" && \
+    echo "\n=== Final search for generated styles.css ===" && \
+    find /app -name "styles.css" -type f
+
+# ── Final stage: Lightweight runtime ─────────────────────────────────────────────
 FROM python:3.13-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
@@ -25,29 +54,20 @@ RUN useradd --system --uid 1000 --create-home appuser
 
 WORKDIR /app
 
-# Copy wheels + install deps (as root)
-COPY --from=builder /wheels /wheels
-COPY requirements.txt .
-RUN pip install --no-cache-dir /wheels/* && \
-    rm -rf /wheels
+# Copy wheels/deps from builder (if you had a separate wheel stage, merge here)
+# But since builder already installed deps, we can copy the whole /app (including built CSS)
+COPY --from=builder /app /app
 
-# Pre-create staticfiles dir and give ownership to appuser BEFORE copying code
-RUN mkdir -p /app/staticfiles && \
-    chown -R appuser:appuser /app/staticfiles
+# Pre-create dirs & fix ownership (important for collectstatic + appuser)
+RUN mkdir -p /app/staticfiles /app/logs && \
+    chown -R appuser:appuser /app/staticfiles /app/logs && \
+    chmod -R 775 /app/logs
 
-# Copy the rest of the project (chown to appuser)
-COPY --chown=appuser:appuser . .
-
-# Switch to non-root user
+# Switch to non-root
 USER appuser
 
-# Set settings module (you already have this, keep it)
-ENV DJANGO_SETTINGS_MODULE=proj.settings
-
-RUN SECRET_KEY="nothing-for-build" python manage.py tailwind build --no-input
-
-# Now collectstatic runs as appuser, and it can write to /app/staticfiles
-RUN python manage.py collectstatic --noinput
+# Collect static files (now includes the freshly built Tailwind CSS)
+RUN python manage.py collectstatic --noinput --clear
 
 EXPOSE 8000
 
