@@ -44,7 +44,6 @@ Thumbs.db
 
 # Build and temporary files
 build/
-dist/
 *.egg-info/
 htmlcov/
 .coverage
