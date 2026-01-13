@@ -1,13 +1,11 @@
 # Django Micro-SaaS Boilerplate 🚀
-### Building a portfolio of micro saas, so that I can spend time with family while still be able to provide financially 🎉  
+### Build SaaS → Make money → Financial independence → Freedom 🎉  
 
-Hi, I'm George — a self-taught developer with a dream. Like many of us, I got tired of the soul-sucking 9-5 grind stealing time from my family.  
+This is the free version of my boilerplate and it supports Stripe single payment, meaning you can sell a one off product using this.  
 
-So, I started building a portfolio of micro-SaaS to generate passive-ish income. The more I ship, the closer I get to financial freedom and more family moments.  
+The best way to make money with this is to build a digital product, market it on X, Linkedin and Reddit. If you can automate it, you can basically print money.  
 
-This boilerplate lays the foundation to build saas as efficiently as possible. Plug in your API keys, customize and ship. It has helped me saved hours setting up Stripe and authentication (which I think are the hardest).  
-
-A paid version of this boilerplate supporting Stripe subscription payment is coming soon
+If you are looking for a subscription-based saas boilerplate, I am building one. You can join the waitlist here → LINK (to be added)
 
 
 &nbsp;
@@ -52,7 +50,27 @@ This project is designed to run with **Docker**
 
 2. **Create and configure the environment file**  
     ```bash
-    cp .env.example .env
+        DEBUG = 'True' 
+        SECRET_KEY = 
+        ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,[::1]
+
+        # Postgres
+        DB_HOST = ''
+        DB_NAME = ''
+        DB_USER = ''
+        DB_PASSWORD = ''
+        DB_SSLMODE = 'prefer' # ← Change to require in prod 
+
+        # Stripe
+        STRIPE_PUBLISHABLE_KEY = ''
+        STRIPE_SECRET_KEY = ''
+        STRIPE_WEBHOOK_SECRET = ''
+        STRIPE_PRODUCT_ID = ''
+        STRIPE_PRICE_ID = ''
+
+        # For production, uncomment
+        # DATABASE_URL=postgres://user:pass@host:5432/dbname
+        # DJANGO_SETTINGS_MODULE=proj.settings.production
     ```
 
 3. **Start the application**  
@@ -72,9 +90,6 @@ This project is designed to run with **Docker**
 
 &nbsp;
 
-## Why you shouldn't use this  
-
-
 
 
 ## Free Hosting on Linode 💰
@@ -85,7 +100,9 @@ This project is designed to run with **Docker**
 &nbsp;
 
 
-## Contact me 📧
+## Contact me 📧  
+
+Hi, my name is George, a self-taught developer. My goal is to build a bunch of saas, make money, quit my job, become financially independent, so that I can spend time with my family. 
 
 - [X](https://x.com/joji_jiji)
 - [![Paid](https://img.shields.io/badge/Paid-Boilerplate-pink)](https://hero.codes/) **4 MORE App Templates to make M0N3Y 🤑🤑** 👉 [Check It Out!](https://hero.codes/)  
