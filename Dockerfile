@@ -6,8 +6,12 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
+# Install build dependencies for Python packages + curl for Node.js setup
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc libc-dev \
+    curl \
+    gnupg \
+    ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt .
@@ -20,6 +24,18 @@ FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
+# Install Node.js 22.x LTS (modern Nodesource method with keyring)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    curl \
+    gnupg \
+    ca-certificates \
+    && mkdir -p /etc/apt/keyrings \
+    && curl -fsSL https://deb.nodesource.com/gpgkey/nodesource-repo.gpg.key | gpg --dearmor -o /etc/apt/keyrings/nodesource.gpg \
+    && echo "deb [signed-by=/etc/apt/keyrings/nodesource.gpg] https://deb.nodesource.com/node_22.x nodistro main" | tee /etc/apt/sources.list.d/nodesource.list \
+    && apt-get update \
+    && apt-get install -y nodejs \
+    && apt-get clean && rm -rf /var/lib/apt/lists/*
+
 # Create non-root user
 RUN useradd --system --uid 1000 --create-home appuser
 
@@ -31,22 +47,23 @@ COPY requirements.txt .
 RUN pip install --no-cache-dir /wheels/* && \
     rm -rf /wheels
 
-# Pre-create staticfiles dir and give ownership to appuser BEFORE copying code
-RUN mkdir -p /app/staticfiles && \
-    chown -R appuser:appuser /app/staticfiles
+# Pre-create staticfiles dir
+RUN mkdir -p /app/staticfiles
 
-# Copy the rest of the project (chown to appuser)
-COPY --chown=appuser:appuser . .
+COPY . .
+
+# Now install npm deps as root (after code is copied)
+RUN cd /app/theme/static_src && npm install
+
+RUN chown -R appuser:appuser /app
 
 # Switch to non-root user
 USER appuser
 
-# Set settings module (you already have this, keep it)
+# Set settings module
 ENV DJANGO_SETTINGS_MODULE=proj.settings
 
-
-
-# Now collectstatic runs as appuser, and it can write to /app/staticfiles
+# Now collectstatic runs as appuser
 RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
