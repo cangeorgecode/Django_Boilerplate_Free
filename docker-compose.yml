@@ -26,6 +26,7 @@ services:
       - "8000:8000"
     volumes:
       - .:/app  # ← only needed for development hot-reload
+      - /app/theme/static_src/node_modules
     depends_on:
       db:
         condition: service_healthy
