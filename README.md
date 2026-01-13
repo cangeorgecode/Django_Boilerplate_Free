@@ -18,7 +18,7 @@ This free version supports Stripe single payment, meaning you can sell a digital
 
 
 
-## Subscription-based SaaS boilerplate
+## Recurring revenue 
 
 If you are looking for a subscription-based saas boilerplate, I am building one. You can join the waitlist here → LINK (to be added)
 
