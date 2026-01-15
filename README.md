@@ -9,7 +9,7 @@ This free version supports Stripe single payment. You can create a product, plug
 
 1. Find a profitable idea - does it provide 'value' for others:  
     - Make or save money  
-    - Save time  
+    - Save time, less work  
     - Overcome technical barrier  
     - More followers  
     - Go viral - more views, more likes, more shares, more save  
@@ -35,6 +35,12 @@ This free version supports Stripe single payment. You can create a product, plug
     - Takeaway - share what you have learn, give actionable step by step guide  
     - CTA - ask people to comment (for marketing funnel) or ask people to share and save (for algo)  
 
+5. My favourite hooks collection that can't be found on Google:  
+    - "Is it possible to..."  
+    - "Can I..."  
+    - "It took me X months, but I finally figured out how to..."  
+    - "How I..."  
+    - "I failed..."  
 
 &nbsp;
 
@@ -43,12 +49,13 @@ This free version supports Stripe single payment. You can create a product, plug
 
 Subscription-based boilerplate ($99, one time purchase) available here → (Link to be added)  
 
-**Do NOT buy until you have tried the free version and you are ok with:**  
+**I want to be honest with your expectation if you do decide to buy the premium version:**  
 
-1. I have just become a dad and life is hectic. I have limited time to support, but I will support whenever I can  
-2. Docker is new to me, I have tested it quite thoroughly, but no guarantee it works on your end. I am confident in other parts of the code  
-3. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
-4. It's been tested in WSL2 and Ubuntu 24
+1. **Please try the free version before you make a purchase**
+2. I have just become a dad and life is hectic. I have limited time to support, but I will support whenever I can  
+3. Docker is new to me, I have tested it thoroughly, but no guarantee it works on your end. I am confident in other parts of the code  
+4. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
+5. It's been tested in WSL2 and Ubuntu 24  
 
 
 &nbsp;
@@ -116,7 +123,7 @@ This project is designed to run with **Docker**
     # DJANGO_SETTINGS_MODULE=proj.settings.production
     ```
 
-3. **Install nginx (when you deploy)**
+3. **Install nginx (Skip to step 4 if you are testing on local machine)**  
     I am using nginx in the host, not the docker nginx  
 
     ```bash
@@ -173,19 +180,52 @@ This project is designed to run with **Docker**
     ```
 
 
-4. **Start the application**  
+4. **Build the application**  
     ```bash
-    docker compose up --build
+    docker compose build --no-cache
     ```
 
-5. **Install certbot and get https for your app**
+    **Run the application in foreground**
+    ```bash
+    docker compose up
+    ```
+
+    **Run application in background**
+    ```bash
+    docker compose up -d
+    ```
+
+    **Supports Tailwind hot reload in development**  
+    ```bash
+    docker compose up -d  
+    docker compose run --rm web python manage.py tailwind dev
+    ```
+
+5. **Install certbot and get https for your app (Skip this step if you are testing on local machine)**
     ```bash
     sudo apt install certbot python3-certbot-nginx
     sudo certbot --nginx -d <domain_name>
     ```  
 
 6. **Open the app (locally)**
-    Go to: http://localhost:8000  
+    Go to: http://localhost:8000   
+
+7. **Troubleshooting commands**  
+    Here are some places to take a look at if things don't work:  
+
+    **Docker**  
+    ```bash
+    docker ps
+    docker compose logs web  
+    docker compose logs db
+    ```  
+
+    **Nginx**  
+    ```bash
+    sudo tail -20 /var/www/logs/nginx/error.log
+
+    sudo systemctl status nginx
+    ```
 
 
 &nbsp;
@@ -194,7 +234,7 @@ This project is designed to run with **Docker**
 
 ## Free Hosting on Linode 💰
 
-- I use Docker from the marketplace on Linode for this set up
+- I use Docker from the marketplace on Linode for this set up  
 - Hosting: $10/month (Get $60 credit on Linode with my [referral link](https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
 
 
