@@ -6,7 +6,7 @@ ENV PYTHONDONTWRITEBYTECODE=1 \
 
 WORKDIR /app
 
-# Install build dependencies for Python packages + curl for Node.js setup
+# Install build dependencies
 RUN apt-get update && apt-get install -y --no-install-recommends \
     gcc libc-dev \
     curl \
@@ -24,7 +24,7 @@ FROM python:3.13-slim
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1
 
-# Install Node.js 22.x LTS (modern Nodesource method with keyring)
+# Install Node.js 22.x (needed for tailwind build)
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     gnupg \
@@ -41,30 +41,36 @@ RUN useradd --system --uid 1000 --create-home appuser
 
 WORKDIR /app
 
-# Copy wheels + install deps (as root)
+# Copy and install Python dependencies
 COPY --from=builder /wheels /wheels
 COPY requirements.txt .
 RUN pip install --no-cache-dir /wheels/* && \
     rm -rf /wheels
 
-# Pre-create staticfiles dir
-RUN mkdir -p /app/staticfiles
+# Pre-create writable directories and set correct ownership
+RUN mkdir -p /app/staticfiles \
+             /app/media \
+             /app/logs \
+    && chown -R appuser:appuser /app \
+    && chmod -R 755 /app/staticfiles /app/media /app/logs
 
+# Copy project code
 COPY . .
 
-# Now install npm deps as root (after code is copied)
-RUN cd /app/theme/static_src && npm install
+# Build frontend assets (tailwind/daisyUI)
+RUN cd /app/theme/static_src && npm ci && npm run build
 
+# Collect static files (runs as root, but directory is already owned by appuser)
+RUN python manage.py collectstatic --noinput --clear
+
+# Final ownership pass (covers anything created during collectstatic/build)
 RUN chown -R appuser:appuser /app
 
 # Switch to non-root user
 USER appuser
 
-# Set settings module
+# Django settings
 ENV DJANGO_SETTINGS_MODULE=proj.settings
-
-# Now collectstatic runs as appuser
-RUN python manage.py collectstatic --noinput
 
 EXPOSE 8000
 

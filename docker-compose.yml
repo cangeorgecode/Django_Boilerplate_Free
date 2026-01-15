@@ -7,31 +7,29 @@ services:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - postgres_data:/var/lib/postgresql 
+      - postgres_data:/var/lib/postgresql
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U ${DB_USER} -d ${DB_NAME}"]
       interval: 5s
       timeout: 3s
-      retries: 6
+      retries: 10
 
   web:
     build: .
     restart: unless-stopped
     command: >
-      sh -c "python manage.py migrate &&
+      sh -c "python manage.py migrate --noinput &&
              gunicorn --bind 0.0.0.0:8000 --workers 3 proj.wsgi:application"
-    # For pure development you can override with:
-    # command: python manage.py runserver 0.0.0.0:8000
-    ports:
-      - "8000:8000"
     volumes:
-      - .:/app  # ← only needed for development hot-reload
-      - /app/theme/static_src/node_modules
+      - static_volume:/app/staticfiles
     depends_on:
       db:
         condition: service_healthy
     env_file:
       - .env
+    ports:
+      - "8000:8000"
 
 volumes:
   postgres_data:
+  static_volume:
