@@ -5,7 +5,7 @@ This free version supports Stripe single payment. You can create a product, plug
 
 &nbsp;
 
-### Marketing, Sales Strategy:  
+### My Sales and Marketing strategy to build SaaS:  
 
 1. Find a profitable idea - does it provide 'value' for others:  
     - Make or save money  
