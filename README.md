@@ -1,11 +1,11 @@
 # Django Micro-SaaS Boilerplate 🚀
-### How you can make money by selling digital products 🎉  
+### A boilerplate that gives you a head start in monetization 🎉  
 
 This free version supports Stripe single payment. You can create a product, plug in the API keys and start selling.  
 
 &nbsp;
 
-### Here's how I'd make money:  
+### Marketing, Sales Strategy:  
 
 1. Find a profitable idea - does it provide 'value' for others:  
     - Make or save money  
@@ -48,6 +48,7 @@ Subscription-based boilerplate ($99, one time purchase) available here → (Link
 1. I have just become a dad and life is hectic. I have limited time to support, but I will support whenever I can  
 2. Docker is new to me, I have tested it quite thoroughly, but no guarantee it works on your end. I am confident in other parts of the code  
 3. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
+4. It's been tested in WSL2 and Ubuntu 24
 
 
 &nbsp;
@@ -193,6 +194,7 @@ This project is designed to run with **Docker**
 
 ## Free Hosting on Linode 💰
 
+- I use Docker from the marketplace on Linode for this set up
 - Hosting: $10/month (Get $60 credit on Linode with my [referral link](https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
 
 
