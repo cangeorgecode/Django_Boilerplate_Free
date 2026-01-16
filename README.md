@@ -45,15 +45,15 @@ This free version supports Stripe single payment. You can create a product, plug
 &nbsp;
 
 
-### Subscription-based boilerplate for recurring revenue 
+### Subscription-based boilerplate + Live Demo of the free boilerplate
 
-Subscription-based boilerplate ($99, one time purchase) available here → (Link to be added)  
+Build a saas with recurring revenue using the premium boilerplate ($99, launch discount) available here → [Built with this free boilerplate](https://vibecodesaas.com)  
 
-**I want to be honest with your expectation if you do decide to buy the premium version:**  
+**I want to be honest with your expectation before purchase:**  
 
-1. **Please try the free version before you make a purchase**
-2. I have just become a dad and life is hectic. I have limited time to support, but I will support whenever I can  
-3. Docker is new to me, I have tested it thoroughly, but no guarantee it works on your end. I am confident in other parts of the code  
+1. **Please try the free version first**
+2. Support will be limited, because I just become a father :D I will help out whenever I can.    
+3. I have tested thoroughly but no guarantee it will work for you. Try the free version first.  
 4. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
 5. It's been tested in WSL2 and Ubuntu 24  
 
