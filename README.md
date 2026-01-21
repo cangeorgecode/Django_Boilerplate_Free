@@ -1,11 +1,43 @@
 # Django Micro-SaaS Boilerplate 🚀
 ### A boilerplate that gives you a head start in monetization 🎉  
 
-This free version supports Stripe single payment. You can create a product, plug in the API keys and start selling.  
+## Free vs Premium Boilerplate
+
++=========================+====================================+
+| Free                    | [Premium](https://vibecodesaas.com)|
++=========================+====================================+
+| Django                  | Django                             |
++=========================+====================================+
+| Tailwind + DaisyUI      | Tailwind + DaisyUI                 |
++=========================+====================================+
+| HTMX                    | HTMX                               |
++=========================+====================================+
+| Stripe (one-off payment)| Stripe (recurring)                 |
++=========================+====================================+
+| Django-allauth          | Django-allauth                     |
++=========================+====================================+
+| Postgresql              | Postgresql                         |
++=========================+====================================+
+| Docker                  | Docker                             |
++=========================+====================================+ 
 
 &nbsp;
 
-### My Sales and Marketing strategy to build SaaS:  
+### Get the premium version today
+
+Start charging your users today → [Premium SaaS Boilerplate, ~~$199~~ $99 Launch Discount](https://vibecodesaas.com)  
+
+**BEFORE YOU BUY, READ THIS**  
+
+1. **Please try the free version first**
+2. Support will be limited, because I just become a father :D I will help out whenever I can.    
+3. I have tested thoroughly but no guarantee it will work for you. Try the free version first.  
+4. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
+5. It's been tested in WSL2 and Ubuntu 24  
+
+&nbsp;
+
+### Monetization Playbook 
 
 1. Find a profitable idea - does it provide 'value' for others:  
     - Make or save money  
@@ -41,36 +73,6 @@ This free version supports Stripe single payment. You can create a product, plug
     - "It took me X months, but I finally figured out how to..."  
     - "How I..."  
     - "I failed..."  
-
-&nbsp;
-
-
-### Subscription-based boilerplate + Live Demo of the free boilerplate
-
-Build a saas with recurring revenue using the premium boilerplate ($99, launch discount) available here → [Built with this free boilerplate](https://vibecodesaas.com)  
-
-**I want to be honest with your expectation before purchase:**  
-
-1. **Please try the free version first**
-2. Support will be limited, because I just become a father :D I will help out whenever I can.    
-3. I have tested thoroughly but no guarantee it will work for you. Try the free version first.  
-4. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
-5. It's been tested in WSL2 and Ubuntu 24  
-
-
-&nbsp;
-
-
-## The Stack (No Javascript)
-
-✅ Django  
-✅ Tailwind + DaisyUI  
-✅ HTMX  
-✅ Stripe (one off payment)  
-✅ Django-allauth  
-✅ Postgresql  
-✅ Docker  
-✅ Landing page optimized for conversion    
 
 
 &nbsp;
