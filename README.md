@@ -21,13 +21,15 @@
 
 Start charging your users today → [Premium SaaS Boilerplate, ~~$199~~ $99 Launch Discount](https://vibecodesaas.com)  
 
-**BEFORE YOU BUY, READ THIS 🛑**  
+**🛑 BEFORE YOU BUY, READ THIS 🛑**  
 
 1. **Please try the free version first**
-2. Support will be limited, because I just become a father :D I will help out whenever I can.    
-3. I have tested thoroughly but no guarantee it will work for you. Try the free version first.  
-4. I am self-taught and I vibe coded half the project. Be prepared to get the worst of both worlds. I think I did ok in terms of security  
+2. Support will be limited, because I just become a father :D but will help out whenever I can.    
+3. Tested thoroughly but no guarantee it will work for you. 
+4. Code is unprofessional  
 5. It's been tested in WSL2 and Ubuntu 24  
+6. This repo will be as far as documentation goes
+7. You can expect the same results with the premium version
 
 &nbsp;
 
