@@ -1,7 +1,7 @@
 # Django Micro-SaaS Boilerplate 🚀
 ### A boilerplate that gives you a head start in monetization 🎉  
 
-## Free vs Premium Boilerplate
+## Free 🆚 Premium
 
 
 | Free                    | [Premium](https://vibecodesaas.com)|
@@ -17,11 +17,11 @@
 
 &nbsp;
 
-### Get the premium version today
+### Get the premium version today 🤑
 
 Start charging your users today → [Premium SaaS Boilerplate, ~~$199~~ $99 Launch Discount](https://vibecodesaas.com)  
 
-**BEFORE YOU BUY, READ THIS**  
+**BEFORE YOU BUY, READ THIS 🛑**  
 
 1. **Please try the free version first**
 2. Support will be limited, because I just become a father :D I will help out whenever I can.    
@@ -31,7 +31,7 @@ Start charging your users today → [Premium SaaS Boilerplate, ~~$199~~ $99 Laun
 
 &nbsp;
 
-### Monetization Playbook 
+### Monetization Playbook 📖
 
 1. Find a profitable idea - does it provide 'value' for others:  
     - Make or save money  
@@ -72,7 +72,7 @@ Start charging your users today → [Premium SaaS Boilerplate, ~~$199~~ $99 Laun
 &nbsp;
 
 
-## Installation
+## Installation ⚙️
 
 This project is designed to run with **Docker**
 
