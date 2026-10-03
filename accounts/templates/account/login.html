@@ -1,35 +1,104 @@
 {% extends 'core/base.html' %}
 {% load socialaccount %}
 
+{% block title %}Sign in — YourSaaS{% endblock %}
+
 {% block content %}
 
-<section class="px-4 py-24 mx-auto max-w-7xl min-h-screen flex items-center justify-center bg-gradient-to-br from-gray-800 to-gray-900">
-  <div class="w-full py-6 mx-auto md:w-3/5 lg:w-2/5">
-    <h1 class="mb-6 text-3xl font-bold text-white md:text-4xl md:leading-tight text-center">
-      Login
-    </h1>
+<section class="relative -my-12 flex min-h-[75vh] items-center justify-center overflow-hidden py-16">
+  <!-- Ambient gradient glows -->
+  <div class="pointer-events-none absolute -left-24 -top-32 h-96 w-96 rounded-full bg-primary/25 blur-3xl"></div>
+  <div class="pointer-events-none absolute -bottom-40 -right-24 h-[28rem] w-[28rem] rounded-full bg-fuchsia-500/15 blur-3xl"></div>
+  <!-- Subtle dot grid, faded toward the edges -->
+  <div class="pointer-events-none absolute inset-0 opacity-40 [background-image:radial-gradient(circle,rgba(255,255,255,0.07)_1px,transparent_1px)] [background-size:28px_28px] [mask-image:radial-gradient(ellipse_at_center,black_30%,transparent_75%)]"></div>
 
-    <div class="mt-12 text-center">
-      <!-- Google Login Button -->
-      <a href="{% provider_login_url 'google' %}"
-         class="inline-flex items-center justify-center w-full max-w-xs px-6 py-4 text-lg font-semibold text-white bg-red-600 hover:bg-red-700 rounded-lg transition transform hover:scale-105 shadow-lg">
-        <svg class="w-6 h-6 mr-3" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
-          <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.853,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
-          <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
-          <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.001l6.19,5.238C36.971,39.205,44,34.305,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
-        </svg>
-        Sign in with Google
+  <div class="relative w-full max-w-md">
+    <div class="rounded-3xl border border-base-300/70 bg-base-100/70 p-8 shadow-2xl shadow-black/30 backdrop-blur-xl sm:p-10">
+
+      <!-- Brand -->
+      <a href="{% url 'home' %}" class="mb-8 inline-flex items-center gap-2.5">
+        <span class="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-primary to-fuchsia-500 text-lg font-bold text-white shadow-lg shadow-primary/30">Y</span>
+        <span class="text-xl font-bold tracking-tight">YourSaaS</span>
       </a>
-    </div>
 
-    <p class="mt-10 text-sm text-center text-gray-400">
-      By signing in you agree to our
-      <a href="#" class="text-blue-400 hover:text-blue-300">Terms of Service</a>
-      and
-      <a href="#" class="text-blue-400 hover:text-blue-300">Privacy Policy</a>.
-    </p>
+      <!-- Heading -->
+      <h1 class="text-2xl font-bold sm:text-3xl">Welcome back</h1>
+      <p class="mt-2 text-sm text-base-content/60">Sign in to your account to continue.</p>
+
+      <!-- Social providers -->
+      <div class="mt-8 space-y-3">
+        {% get_providers as socialaccount_providers %}
+        {% for provider in socialaccount_providers %}
+          {% if provider.id == 'google' %}
+          <a href="{% provider_login_url provider.id %}"
+             data-provider-btn
+             data-provider-name="Google"
+             class="group flex w-full items-center justify-center gap-3 rounded-xl border border-base-300 bg-white px-4 py-3 text-sm font-semibold text-gray-800 shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-gray-50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <svg class="h-5 w-5 shrink-0" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <path fill="#FFC107" d="M43.611,20.083H42V20H24v8h11.303c-1.649,4.657-6.08,8-11.303,8c-6.627,0-12-5.373-12-12c0-6.627,5.373-12,12-12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C12.955,4,4,12.955,4,24c0,11.045,8.955,20,20,20c11.045,0,20-8.955,20-20C44,22.659,43.862,21.35,43.611,20.083z"></path>
+              <path fill="#FF3D00" d="M6.306,14.691l6.571,4.819C14.655,15.108,18.853,12,24,12c3.059,0,5.842,1.154,7.961,3.039l5.657-5.657C34.046,6.053,29.268,4,24,4C16.318,4,9.656,8.337,6.306,14.691z"></path>
+              <path fill="#4CAF50" d="M24,44c5.166,0,9.86-1.977,13.409-5.192l-6.19-5.238C29.211,35.091,26.715,36,24,36c-5.202,0-9.619-3.317-11.283-7.946l-6.522,5.025C9.505,39.556,16.227,44,24,44z"></path>
+              <path fill="#1976D2" d="M43.611,20.083H42V20H24v8h11.303c-0.792,2.237-2.231,4.166-4.087,5.571c0.001-0.001,0.002-0.001,0.003-0.001l6.19,5.238C36.971,39.205,44,34.305,44,24C44,22.659,43.862,21.35,43.611,20.083z"></path>
+            </svg>
+            <span class="btn-label">Sign in with Google</span>
+            <svg class="btn-spinner hidden h-4 w-4 animate-spin text-gray-500" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </a>
+          {% elif provider.id == 'facebook' %}
+          <a href="{% provider_login_url provider.id %}"
+             data-provider-btn
+             data-provider-name="Facebook"
+             class="group flex w-full items-center justify-center gap-3 rounded-xl bg-[#1877F2] px-4 py-3 text-sm font-semibold text-white shadow-sm transition duration-200 hover:-translate-y-0.5 hover:bg-[#166FE0] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            <svg class="h-5 w-5 shrink-0" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"></path>
+            </svg>
+            <span class="btn-label">Continue with Facebook</span>
+            <svg class="btn-spinner hidden h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </a>
+          {% endif %}
+        {% empty %}
+          <div class="rounded-xl border border-dashed border-base-300 p-4 text-center text-sm text-base-content/50">
+            Login is not configured yet — please check back soon.
+          </div>
+        {% endfor %}
+      </div>
+
+      <!-- Divider -->
+      <div class="my-8 flex items-center gap-4">
+        <span class="h-px flex-1 bg-base-300"></span>
+        <span class="text-[11px] uppercase tracking-widest text-base-content/40">Secure sign-in</span>
+        <span class="h-px flex-1 bg-base-300"></span>
+      </div>
+
+      <!-- Legal -->
+      <p class="text-center text-xs leading-relaxed text-base-content/50">
+        By signing in you agree to our
+        <a href="{% url 'terms' %}" class="link link-hover font-medium text-primary/80 hover:text-primary">Terms of Service</a>
+        and
+        <a href="{% url 'privacy' %}" class="link link-hover font-medium text-primary/80 hover:text-primary">Privacy Policy</a>.
+      </p>
+    </div>
   </div>
 </section>
+
+<script>
+  // Give immediate feedback while the browser redirects to the provider.
+  document.querySelectorAll('a[data-provider-btn]').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var label = btn.querySelector('.btn-label');
+      var spinner = btn.querySelector('.btn-spinner');
+      if (label) {
+        label.textContent = 'Redirecting to ' + (btn.dataset.providerName || 'provider') + '…';
+      }
+      if (spinner) spinner.classList.remove('hidden');
+      btn.classList.add('pointer-events-none', 'opacity-85');
+    });
+  });
+</script>
 
 {% endblock content %}

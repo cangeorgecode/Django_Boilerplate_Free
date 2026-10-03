@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Send email to users</title>
+  <style>
+    body { font-family: -apple-system, "Segoe UI", Roboto, sans-serif; background: #f4f5f7; margin: 0; padding: 2rem; color: #1a1a2e; }
+    .card { max-width: 720px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 2rem; box-shadow: 0 4px 24px rgba(0,0,0,.08); }
+    h1 { margin-top: 0; font-size: 1.4rem; }
+    label { display: block; font-weight: 600; margin: 1rem 0 .35rem; }
+    input[type=text], textarea { width: 100%; padding: .6rem; border: 1px solid #d0d3d9; border-radius: 8px; font: inherit; box-sizing: border-box; }
+    textarea { resize: vertical; }
+    .row { display: flex; gap: 1.5rem; align-items: center; margin: 1rem 0; }
+    button { background: #4f46e5; color: #fff; border: 0; padding: .7rem 1.6rem; border-radius: 8px; font-size: 1rem; cursor: pointer; }
+    .messages { margin: 1rem 0; padding: .7rem 1rem; border-radius: 8px; background: #ecfdf5; border: 1px solid #a7f3d0; }
+    .error { background: #fef2f2; border-color: #fecaca; }
+    .help { font-size: .85rem; color: #6b7280; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Send email to users</h1>
+    <p class="help">{{ user_count }} active user(s) on this site. Emails are sent individually to each recipient.</p>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="messages {% if message.tags == 'error' %}error{% endif %}">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+      <div class="row">
+        <label>
+          {{ form.recipients_mode.label_tag }}
+          {{ form.recipients_mode }}
+        </label>
+        <label>
+          Subject
+          {{ form.subject }}
+        </label>
+      </div>
+      {{ form.user_ids }}
+      <label>Body {{ form.body }}</label>
+      <button type="submit">Send</button>
+    </form>
+  </div>
+</body>
+</html>

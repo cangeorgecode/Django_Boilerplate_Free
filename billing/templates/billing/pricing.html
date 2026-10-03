@@ -1,0 +1,49 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-16">
+  <div class="max-w-5xl mx-auto px-6 text-center">
+    <h1 class="text-4xl md:text-5xl font-bold mb-4">Simple plans. No surprises.</h1>
+    <p class="text-lg text-base-content/70 mb-2">Every plan includes monthly credits. 1 credit = 1 video.</p>
+    <p class="text-sm text-base-content/50 mb-12">Need more mid-month? Top-ups are always available — 5 credits for $9.</p>
+
+    {% if not billing_configured %}
+      <div class="alert alert-warning max-w-xl mx-auto mb-10 shadow-lg">
+        <svg xmlns="http://www.w3.org/2000/svg" class="stroke-current shrink-0 h-6 w-6" fill="none" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" /></svg>
+        <span>Billing is not configured yet — checkouts are disabled until then.</span>
+      </div>
+    {% endif %}
+
+    <div class="grid md:grid-cols-3 gap-8 items-stretch">
+      {% for tier in tier_cards %}
+      <div class="card shadow-xl {% if tier.badge %}border-2 border-primary ring-2 ring-primary/40{% else %}bg-base-200{% endif %}">
+        <div class="card-body items-center text-center">
+          {% if tier.badge %}
+            <div class="badge badge-primary absolute -top-3">{{ tier.badge }}</div>
+          {% endif %}
+          <h3 class="card-title text-2xl">{{ tier.name }}</h3>
+          <div class="text-5xl font-extrabold text-primary">${{ tier.monthly_usd }}<span class="text-base font-normal text-base-content/60">/mo</span></div>
+          <p class="text-lg font-semibold">{{ tier.credits }} credits</p>
+          <p class="text-sm text-base-content/60">${{ tier.per_credit }} per credit</p>
+          <p class="text-sm text-base-content/70 mt-2">{{ tier.blurb }}</p>
+          <div class="mt-6 w-full">
+            {% if tier.configured %}
+            <form method="post" action="{% url 'billing:checkout' tier.slug %}">
+              {% csrf_token %}
+              <button type="submit" class="btn {% if tier.badge %}btn-primary{% else %}btn-outline{% endif %} btn-block">Choose {{ tier.name }}</button>
+            </form>
+            {% else %}
+            <button class="btn btn-disabled btn-block" disabled>Coming soon</button>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <p class="mt-10 text-sm text-base-content/50">
+      Cancel anytime from your account page. Payments processed securely by Lemon Squeezy.
+    </p>
+  </div>
+</section>
+{% endblock content %}

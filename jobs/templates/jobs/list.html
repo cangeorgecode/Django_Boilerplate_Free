@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-12">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold">Your videos</h1>
+      <a href="{% url 'jobs:create' %}" class="btn btn-primary">New video</a>
+    </div>
+
+    {% if jobs %}
+    <div class="overflow-x-auto">
+      <table class="table w-full">
+        <thead>
+          <tr><th>Video</th><th>Status</th><th>Progress</th><th>Created</th><th></th></tr>
+        </thead>
+        <tbody>
+          {% for job in jobs %}
+          <tr>
+            <td>#{{ job.id }}</td>
+            <td>
+              {% if job.status == "done" %}<span class="badge badge-success">done</span>
+              {% elif job.status == "failed" %}<span class="badge badge-error">failed</span>
+              {% else %}<span class="badge badge-info">{{ job.status }}</span>{% endif %}
+            </td>
+            <td>
+              {% if job.status != "done" and job.status != "failed" %}
+              <progress class="progress progress-primary w-32" value="{{ job.progress }}" max="100"></progress>
+              {% else %}—{% endif %}
+            </td>
+            <td>{{ job.created_at|date:"M j, H:i" }}</td>
+            <td><a href="{% url 'jobs:detail' job.id %}" class="btn btn-ghost btn-sm">Open</a></td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+    {% else %}
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body items-center text-center">
+        <p class="text-lg text-base-content/70">Nothing here yet.</p>
+        <a href="{% url 'jobs:create' %}" class="btn btn-primary mt-4">Create your first video</a>
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

@@ -173,17 +173,11 @@ node_modules/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Docker & Compose extras
-docker-compose.override.yml
-compose.override.yml
+# Env variants (keep .env.example tracked — it's the documented template)
 .env.*
-*.dockerignore  # only if it contains paths to secrets
+!.env.example
 
-# PostgreSQL data volumes (Docker)
-postgres_data/
-pgdata/
-
-# Collected static files (usually generated in Docker)
+# Collected static files
 staticfiles/
 
 # OS / Editor files

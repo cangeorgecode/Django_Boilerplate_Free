@@ -1,0 +1,107 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-16">
+  <div class="max-w-3xl mx-auto px-6">
+    <h1 class="text-3xl md:text-4xl font-bold mb-8">Your Plan</h1>
+
+    <div class="stats shadow mb-8 w-full">
+      <div class="stat">
+        <div class="stat-title">Credit balance</div>
+        <div class="stat-value text-primary">{{ credit_balance }}</div>
+        <div class="stat-desc">1 credit = 1 video</div>
+      </div>
+    </div>
+
+    <div class="card bg-base-200 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title mb-2">Need more credits?</h2>
+        <p class="text-sm text-base-content/60 mb-4">Top up any time — credits never expire while your account is active.</p>
+        {% for pack in topup_packs %}
+        <form method="post" action="{% url 'billing:topup' pack.slug %}" class="inline">
+          {% csrf_token %}
+          <button type="submit" class="btn btn-outline" {% if not billing_configured %}disabled{% endif %}>
+            {{ pack.name }} — ${{ pack.price_usd }}
+          </button>
+        </form>
+        {% endfor %}
+        {% if not billing_configured %}
+        <p class="text-xs text-base-content/50 mt-2">Top-ups will be available once billing is configured.</p>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if transactions %}
+    <div class="card bg-base-200 shadow-xl mb-8">
+      <div class="card-body">
+        <h2 class="card-title mb-2">Recent credit activity</h2>
+        <div class="overflow-x-auto">
+          <table class="table table-sm">
+            <thead><tr><th>Date</th><th>Credits</th><th>Reason</th></tr></thead>
+            <tbody>
+              {% for tx in transactions %}
+              <tr>
+                <td>{{ tx.created_at|date:"M j, Y H:i" }}</td>
+                <td class="{% if tx.amount > 0 %}text-success{% else %}text-error{% endif %}">{{ tx.amount }}{% if tx.amount > 0 %}+{% endif %}</td>
+                <td>{{ tx.get_reason_display }}</td>
+              </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    {% endif %}
+
+    {% if subscriptions %}
+      {% for subscription in subscriptions %}
+      <div class="card bg-base-200 shadow-xl mb-6">
+        <div class="card-body">
+          <div class="flex items-center justify-between flex-wrap gap-4">
+            <div>
+              <h2 class="card-title">
+                {{ subscription.tier|title|default:"Plan" }}
+                {% if subscription.status == "active" or subscription.status == "trialing" %}
+                  <div class="badge badge-success">{{ subscription.status }}</div>
+                {% elif subscription.status == "past_due" %}
+                  <div class="badge badge-warning">{{ subscription.status }}</div>
+                {% else %}
+                  <div class="badge badge-error">{{ subscription.status }}</div>
+                {% endif %}
+              </h2>
+              <p class="text-sm text-base-content/60">
+                {% if subscription.current_period_end %}Renews {{ subscription.current_period_end|date:"M j, Y" }}{% endif %}
+                {% if subscription.cancel_at_period_end %} · cancels at period end{% endif %}
+              </p>
+            </div>
+            <div class="flex gap-2">
+              {% if subscription.status != "canceled" and not subscription.cancel_at_period_end %}
+              <form method="post" action="{% url 'billing:manage_cancel' subscription.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-outline btn-sm">Cancel</button>
+              </form>
+              {% elif subscription.cancel_at_period_end %}
+              <form method="post" action="{% url 'billing:manage_resume' subscription.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-primary btn-sm">Resume</button>
+              </form>
+              {% endif %}
+              {% if subscription.provider == "lemonsqueezy" and subscription.status != "canceled" %}
+              <a href="{% url 'billing:portal' %}" class="btn btn-outline btn-sm">Billing details</a>
+              {% endif %}
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    {% else %}
+      <div class="card bg-base-200 shadow-xl mb-6">
+        <div class="card-body items-center text-center">
+          <p class="text-lg text-base-content/70">No subscription yet.</p>
+          <a href="{% url 'billing:pricing' %}" class="btn btn-primary mt-4">See Plans</a>
+        </div>
+      </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock content %}

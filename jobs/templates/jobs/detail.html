@@ -1,0 +1,79 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-12" data-job-id="{{ job.id }}">
+  <div class="max-w-3xl mx-auto px-6">
+    <div class="flex items-center justify-between mb-8">
+      <h1 class="text-3xl font-bold">Video #{{ job.id }}</h1>
+      <a href="{% url 'jobs:list' %}" class="btn btn-ghost btn-sm">Back to list</a>
+    </div>
+
+    <div class="card bg-base-200 shadow-xl mb-6">
+      <div class="card-body">
+        <div class="flex items-center gap-4">
+          <div id="job-status" class="badge badge-lg
+            {% if job.status == 'done' %}badge-success{% elif job.status == 'failed' %}badge-error{% else %}badge-info{% endif %}">
+            {{ job.status }}
+          </div>
+          <div id="job-progress" class="flex-1">
+            {% if job.status != 'done' and job.status != 'failed' %}
+            <progress class="progress progress-primary w-full" value="{{ job.progress }}" max="100"></progress>
+            {% endif %}
+          </div>
+        </div>
+        <p id="job-error" class="text-error mt-2 {% if not job.error %}hidden{% endif %}">{{ job.error }}</p>
+      </div>
+    </div>
+
+    {% if job.output %}
+    <div class="card bg-base-200 shadow-xl mb-6">
+      <div class="card-body items-center">
+        <h2 class="card-title mb-4">Your video is ready</h2>
+        <a href="{% url 'uploads:download' job.output.id %}" class="btn btn-primary btn-lg">Download</a>
+      </div>
+    </div>
+    {% endif %}
+
+    <div class="card bg-base-200 shadow-xl">
+      <div class="card-body">
+        <h2 class="card-title text-lg mb-2">Activity log</h2>
+        <ul id="job-logs" class="text-sm text-base-content/70 space-y-1">
+          {% for line in job.logs %}<li>{{ line }}</li>{% empty %}<li>Waiting for the worker…</li>{% endfor %}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% if job.status != 'done' and job.status != 'failed' %}
+<script>
+(function () {
+  const section = document.querySelector('[data-job-id]');
+  if (!section) return;
+  const jobId = section.getAttribute('data-job-id');
+  const statusEl = document.getElementById('job-status');
+  const errorEl = document.getElementById('job-error');
+  const logsEl = document.getElementById('job-logs');
+  const timer = setInterval(function () {
+    fetch('/jobs/' + jobId + '/progress/')
+      .then(r => r.json())
+      .then(d => {
+        if (d.logs) {
+          logsEl.innerHTML = d.logs.map(l => '<li>' + l + '</li>').join('');
+        }
+        statusEl.textContent = d.status;
+        if (d.status === 'done') {
+          clearInterval(timer);
+          location.reload();
+        } else if (d.status === 'failed') {
+          clearInterval(timer);
+          statusEl.className = 'badge badge-lg badge-error';
+          if (d.error) { errorEl.textContent = d.error; errorEl.classList.remove('hidden'); }
+        }
+      })
+      .catch(() => {});
+  }, 2500);
+})();
+</script>
+{% endif %}
+{% endblock content %}

@@ -1,0 +1,15 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-24">
+  <div class="max-w-xl mx-auto px-6 text-center">
+    <div class="text-6xl mb-6">🎉</div>
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">You're all set!</h1>
+    <p class="text-lg text-base-content/70 mb-8">
+      Your subscription is being activated. Your monthly credits will appear in your account
+      within a few minutes — if they don't show up right away, give it a moment and refresh.
+    </p>
+    <a href="{% url 'dashboard' %}" class="btn btn-primary btn-lg">Go to Dashboard</a>
+  </div>
+</section>
+{% endblock content %}

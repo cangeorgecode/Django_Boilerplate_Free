@@ -14,12 +14,9 @@
 
       <!-- Prominent Buy CTA with Urgency + Social Proof -->
       <div class="flex flex-col sm:flex-row justify-center gap-6 mt-10">
-        <form method="post" action="{% url 'home' %}">
-          {% csrf_token %}
-          <button type="submit" class="btn btn-primary btn-lg px-12 py-6 text-xl shadow-xl hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105">
-            Buy Now — Only $99 (One-Time)
-          </button>
-        </form>
+        <a href="{% url 'billing:pricing' %}" class="btn btn-primary btn-lg px-12 py-6 text-xl shadow-xl hover:shadow-2xl hover:shadow-primary/40 transition-all duration-300 transform hover:scale-105">
+          Buy Now — Only $99 (One-Time)
+        </a>
         <div class="flex items-center gap-4 text-sm opacity-80">
           <div class="badge badge-success gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" /></svg> Secure Payment</div>
           <div class="badge badge-info gap-2"><svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" /></svg> Instant Access</div>

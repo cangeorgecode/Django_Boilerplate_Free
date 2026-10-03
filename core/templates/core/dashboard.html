@@ -1,1 +1,40 @@
-dashboard
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-12">
+  <div class="max-w-4xl mx-auto px-6">
+    <h1 class="text-3xl font-bold mb-8">Dashboard</h1>
+
+    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+      <a href="{% url 'uploads:upload' %}" class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-3">📤</div>
+          <h2 class="card-title">Upload footage</h2>
+          <p class="text-sm text-base-content/70">Add clips to your library.</p>
+        </div>
+      </a>
+      <a href="{% url 'jobs:create' %}" class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-3">🎬</div>
+          <h2 class="card-title">Create a video</h2>
+          <p class="text-sm text-base-content/70">Script in, 9:16 video out.</p>
+        </div>
+      </a>
+      <a href="{% url 'jobs:list' %}" class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-3">📼</div>
+          <h2 class="card-title">My videos</h2>
+          <p class="text-sm text-base-content/70">Track jobs and download results.</p>
+        </div>
+      </a>
+      <a href="{% url 'billing:manage' %}" class="card bg-base-200 shadow-xl hover:shadow-2xl transition-all">
+        <div class="card-body items-center text-center">
+          <div class="text-5xl mb-3">💳</div>
+          <h2 class="card-title">My plan</h2>
+          <p class="text-sm text-base-content/70">Credits, subscription, top-ups.</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+{% endblock content %}

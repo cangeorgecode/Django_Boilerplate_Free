@@ -1,6 +1,8 @@
 arrow==1.4.0
 asgiref==3.11.0
 binaryornot==0.4.4
+boto3==1.43.104
+celery==5.6.3
 certifi==2026.1.4
 cffi==2.0.0
 chardet==5.2.0
@@ -11,8 +13,8 @@ cryptography==46.0.3
 Django==6.0.1
 django-allauth==65.13.1
 django-browser-reload==1.21.0
-django-cors-headers==4.9.0
 django-htmx==1.27.0
+django-storages==1.14.6
 django-tailwind==4.4.2
 gunicorn==23.0.0
 honcho==2.0.0
@@ -23,6 +25,7 @@ MarkupSafe==3.0.3
 mdurl==0.1.2
 oauthlib==3.3.1
 packaging==25.0
+pillow==12.3.0
 psycopg2-binary==2.9.11
 pycparser==2.23
 Pygments==2.19.2
@@ -33,6 +36,7 @@ python-dotenv==1.2.1
 python-slugify==8.0.4
 PyYAML==6.0.3
 requests==2.32.5
+redis==8.1.0
 rich==14.2.0
 six==1.17.0
 sqlparse==0.5.5

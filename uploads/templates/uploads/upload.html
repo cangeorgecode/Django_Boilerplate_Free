@@ -1,0 +1,293 @@
+{% extends 'core/base.html' %}
+
+{% block title %}Upload footage — YourSaaS{% endblock %}
+
+{% block content %}
+<section class="py-12" id="upload-root"
+         data-initiate-url="{% url 'uploads:initiate' %}"
+         data-complete-url="{% url 'uploads:complete' %}"
+         data-validate-url="{% url 'uploads:validate' 0 %}"
+         data-max-upload-bytes="{{ max_upload_bytes }}"
+         data-quota-remaining="{{ remaining_bytes }}">
+  <div class="max-w-3xl mx-auto px-6 space-y-10">
+
+    <!-- Upload -->
+    <div>
+      <h1 class="text-3xl font-bold mb-2">Upload footage</h1>
+      <p class="text-base-content/70 mb-6">
+        Video or audio clips for your videos. Files are validated (ffprobe)
+        before they can be used in a job.
+      </p>
+
+      <label for="file-input"
+             class="flex flex-col items-center justify-center gap-2 w-full p-10 rounded-2xl border-2 border-dashed border-base-300 bg-base-200/50 cursor-pointer hover:border-primary hover:bg-base-200 transition-colors"
+             id="drop-zone">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-base-content/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 16V8m0 0l-3 3m3-3l3 3M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1" />
+        </svg>
+        <span class="text-sm font-semibold">Click to choose a file</span>
+        <span class="text-xs text-base-content/50" id="drop-hint">mp4, mov, webm, mp3, wav … up to 4 GB</span>
+      </label>
+      <input type="file" id="file-input" class="hidden"
+             accept=".mp4,.mov,.m4v,.webm,.mkv,.avi,.mpg,.mpeg,.m4a,.mp3,.wav,.aac,.flac,.ogg">
+
+      <div id="progress-wrap" class="hidden mt-6 space-y-2">
+        <progress id="upload-progress" class="progress progress-primary w-full" value="0" max="100"></progress>
+        <p class="text-sm text-base-content/60" id="upload-status">Preparing…</p>
+      </div>
+      <div id="upload-error" class="hidden mt-4 alert alert-error"></div>
+    </div>
+
+    <!-- Quota -->
+    <div class="card bg-base-200">
+      <div class="card-body">
+        <div class="flex justify-between items-center mb-2">
+          <h2 class="card-title text-lg">Storage</h2>
+          <span class="text-sm text-base-content/60" id="quota-text">
+            {{ used_bytes|filesizeformat }} of {{ quota_bytes|filesizeformat }} used
+          </span>
+        </div>
+        <progress class="progress progress-primary w-full" value="{{ used_bytes }}" max="{{ quota_bytes }}"></progress>
+      </div>
+    </div>
+
+    <!-- Library -->
+    <div>
+      <h2 class="text-xl font-bold mb-4">My clips</h2>
+      {% if assets %}
+      <div class="overflow-x-auto rounded-2xl border border-base-300">
+        <table class="table w-full">
+          <thead>
+            <tr>
+              <th>File</th>
+              <th>Size</th>
+              <th>Status</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for asset in assets %}
+            <tr id="asset-row-{{ asset.pk }}">
+              <td>
+                <div class="font-medium">{{ asset.display_name }}</div>
+                <div class="text-xs text-base-content/50">
+                  {{ asset.created_at|date:"Y-m-d H:i" }}{% if asset.duration_seconds %} · {{ asset.duration_seconds|floatformat:1 }}s{% endif %}
+                </div>
+                {% if asset.reject_reason %}<div class="text-xs text-error">{{ asset.reject_reason }}</div>{% endif %}
+              </td>
+              <td>{{ asset.size|filesizeformat }}</td>
+              <td>
+                {% if asset.status == 'validated' %}
+                  <span class="badge badge-success">Validated</span>
+                {% elif asset.status == 'pending' %}
+                  <span class="badge badge-warning">Pending</span>
+                {% else %}
+                  <span class="badge badge-error">Rejected</span>
+                {% endif %}
+              </td>
+              <td class="text-right space-x-2 whitespace-nowrap">
+                {% if asset.status == 'pending' %}
+                  <button class="btn btn-sm btn-outline validate-btn" data-validate-url="{% url 'uploads:validate' asset.pk %}">Validate</button>
+                {% elif asset.status == 'validated' %}
+                  <a class="btn btn-sm btn-outline" href="{% url 'uploads:download' asset.pk %}">Download</a>
+                {% endif %}
+                <button class="btn btn-sm btn-ghost text-error delete-btn" data-delete-url="{% url 'uploads:delete' asset.pk %}">Delete</button>
+              </td>
+            </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+      {% else %}
+      <p class="text-base-content/50">No clips yet — upload your first one above.</p>
+      {% endif %}
+    </div>
+
+  </div>
+</section>
+
+<script>
+(function () {
+  var root = document.getElementById('upload-root');
+  var input = document.getElementById('file-input');
+  var progressWrap = document.getElementById('progress-wrap');
+  var progressBar = document.getElementById('upload-progress');
+  var statusLine = document.getElementById('upload-status');
+  var errorBox = document.getElementById('upload-error');
+  var maxBytes = parseInt(root.dataset.maxUploadBytes, 10);
+  var quotaRemaining = parseInt(root.dataset.quotaRemaining, 10);
+
+  function csrfToken() {
+    var m = document.cookie.match(/(?:^|;\s*)csrftoken=([^;]*)/);
+    return m ? m[1] : '';
+  }
+
+  function csrfFetch(url, options) {
+    options = options || {};
+    options.headers = Object.assign({}, options.headers, { 'X-CSRFToken': csrfToken() });
+    return fetch(url, options);
+  }
+
+  function setStatus(text, pct) {
+    statusLine.textContent = text;
+    if (typeof pct === 'number') progressBar.value = pct;
+  }
+
+  function showError(msg) {
+    errorBox.textContent = msg;
+    errorBox.classList.remove('hidden');
+  }
+
+  function resetUi() {
+    progressWrap.classList.add('hidden');
+    progressBar.value = 0;
+    errorBox.classList.add('hidden');
+    input.value = '';
+  }
+
+  function refresh() { window.location.reload(); }
+
+  // ---- step 1: declare the upload -----------------------------------------
+  function initiate(file) {
+    return csrfFetch(root.dataset.initiateUrl, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ filename: file.name, content_type: file.type, size: file.size }),
+    }).then(function (res) { return res.json().then(function (data) {
+      if (!res.ok) throw new Error(data.error || 'Upload rejected');
+      return data;
+    }); });
+  }
+
+  // ---- step 2: move the bytes ---------------------------------------------
+  function uploadBytes(payload, file) {
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('POST', root.dataset.completeUrl);
+      xhr.setRequestHeader('X-CSRFToken', csrfToken());
+      xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable) setStatus('Uploading…', Math.round(100 * e.loaded / e.total));
+      };
+      xhr.onload = function () {
+        var data = {};
+        try { data = JSON.parse(xhr.responseText || '{}'); } catch (e) {}
+        if (xhr.status >= 200 && xhr.status < 300) resolve(data);
+        else reject(new Error(data.error || 'Upload failed'));
+      };
+      xhr.onerror = function () { reject(new Error('Network error during upload')); };
+      xhr.send(payload);
+    });
+  }
+
+  function uploadPresigned(uploadUrl, contentType, file, objectKey) {
+    // PUT straight to storage (R2 presigned URL). Note: the bucket must
+    // allow the app's origin in its CORS config for browser uploads.
+    return new Promise(function (resolve, reject) {
+      var xhr = new XMLHttpRequest();
+      xhr.open('PUT', uploadUrl);
+      xhr.setRequestHeader('Content-Type', contentType);
+      xhr.upload.onprogress = function (e) {
+        if (e.lengthComputable) setStatus('Uploading…', Math.round(100 * e.loaded / e.total));
+      };
+      xhr.onload = function () {
+        if (xhr.status >= 200 && xhr.status < 300) resolve();
+        else reject(new Error('Upload to storage failed'));
+      };
+      xhr.onerror = function () { reject(new Error('Network error during upload')); };
+      xhr.send(file);
+    }).then(function () {
+      // ---- step 3: confirm on the server ----------------------------------
+      return csrfFetch(root.dataset.completeUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ object_key: objectKey }),
+      }).then(function (res) { return res.json().then(function (data) {
+        if (!res.ok) throw new Error(data.error || 'Upload confirmation failed');
+        return data;
+      }); });
+    });
+  }
+
+  function validateUrl(assetId) {
+    // Rendered with a sentinel pk of 0; swap in the real id.
+    return root.dataset.validateUrl.replace('/0/', '/' + assetId + '/');
+  }
+
+  function validate(assetId) {
+    setStatus('Validating media…', null);
+    return csrfFetch(validateUrl(assetId), { method: 'POST' })
+      .then(function (res) { return res.json().then(function (data) {
+        if (!res.ok) throw new Error(data.error || 'Validation failed');
+        return data;
+      }); });
+  }
+
+  // ---- main flow ----------------------------------------------------------
+  input.addEventListener('change', function () {
+    var file = input.files[0];
+    if (!file) return;
+    resetUi();
+    progressWrap.classList.remove('hidden');
+    setStatus('Preparing…', 0);
+
+    // Client-side pre-checks (UX only — the server enforces everything again).
+    var ext = (file.name.split('.').pop() || '').toLowerCase();
+    var allowedExts = ['mp4','mov','m4v','webm','mkv','avi','mpg','mpeg','m4a','mp3','wav','aac','flac','ogg'];
+    if (allowedExts.indexOf(ext) === -1) { showError('File type not allowed.'); return; }
+    if (file.size > maxBytes) { showError('File is larger than the 4 GB per-file limit.'); return; }
+    if (file.size > quotaRemaining) { showError('Not enough storage space left on your account.'); return; }
+
+    initiate(file).then(function (data) {
+      if (data.method === 'presign') {
+        return uploadPresigned(data.upload_url, file.type, file, data.object_key)
+          .then(function (confirm) { return confirm.asset_id; });
+      }
+      var form = new FormData();
+      form.append('object_key', data.object_key);
+      form.append('file', file);
+      return uploadBytes(form, file).then(function (confirm) { return confirm.asset_id; });
+    }).then(function (assetId) {
+      return validate(assetId);
+    }).then(function (result) {
+      if (result.status === 'validated') setStatus('Validated — done!', 100);
+      else if (result.status === 'rejected') { setStatus('File rejected.', 100); showError('Rejected: ' + (result.reject_reason || 'invalid media')); }
+      else setStatus('Uploaded — pending validation.', 100);
+      setTimeout(refresh, 1200);
+    }).catch(function (err) {
+      setStatus('Failed.', 0);
+      showError(err.message || 'Upload failed');
+    });
+  });
+
+  // ---- library actions ----------------------------------------------------
+  document.querySelectorAll('.validate-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      btn.disabled = true;
+      csrfFetch(btn.dataset.validateUrl, { method: 'POST' })
+        .then(function (res) { return res.json().then(function (data) {
+          if (!res.ok) throw new Error(data.error || 'Validation failed');
+          return data;
+        }); })
+        .then(function (r) {
+          if (r.status === 'rejected') alert('Rejected: ' + (r.reject_reason || 'invalid media'));
+          refresh();
+        })
+        .catch(function (err) { alert(err.message || 'Validation failed'); btn.disabled = false; });
+    });
+  });
+
+  document.querySelectorAll('.delete-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (!confirm('Delete this clip?')) return;
+      btn.disabled = true;
+      csrfFetch(btn.dataset.deleteUrl, { method: 'POST' })
+        .then(function (res) {
+          if (!res.ok) throw new Error('Delete failed');
+          refresh();
+        })
+        .catch(function (err) { alert(err.message); btn.disabled = false; });
+    });
+  });
+})();
+</script>
+{% endblock content %}

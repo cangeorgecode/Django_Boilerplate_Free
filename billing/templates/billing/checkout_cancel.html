@@ -1,0 +1,13 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<section class="py-24">
+  <div class="max-w-xl mx-auto px-6 text-center">
+    <h1 class="text-3xl md:text-4xl font-bold mb-4">Checkout cancelled</h1>
+    <p class="text-lg text-base-content/70 mb-8">
+      No worries — nothing was charged. Pick a plan whenever you're ready.
+    </p>
+    <a href="{% url 'billing:pricing' %}" class="btn btn-primary btn-lg">Back to Plans</a>
+  </div>
+</section>
+{% endblock content %}

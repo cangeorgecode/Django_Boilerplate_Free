@@ -1,6 +1,48 @@
 # Django Micro-SaaS Boilerplate 🚀
 ### A boilerplate that gives you a head start in monetization 🎉  
 
+## This build (AaaS runtime)
+
+Added on top of the base boilerplate:
+- Auth: Google + Meta (Facebook) via allauth, env-driven credentials, no DB SocialApps
+- Billing: Lemon Squeezy (primary, Merchant of Record) + Stripe (secondary); subscriptions, top-ups, signed webhooks, idempotent event processing
+- Credits: own ledger (CreditAccount/CreditTransaction) — 1 credit = 1 video; grants, spends, refunds all atomic + idempotent
+- Media: Cloudflare R2 (S3-compatible, region auto, path style, no ACLs) with presigned direct uploads/downloads; local-disk fallback in dev; ffprobe validation + quarantine
+- Jobs: Celery pipeline (transcribe -> caption plan -> TTS -> ffmpeg assemble -> 9:16 mp4), progress polling, per-job cost report, credit refund on pre-execution failure
+- Admin: staff email-to-users page (selected or all)
+- Security: upload allowlists/size caps/UUID keys, server-side pricing resolution, webhook signature verification before parsing, HSTS/nosniff/referrer-policy/frame-deny in prod
+
+## Documentation
+
+- [Getting Started](docs/getting-started.md) — what this is, prerequisites, install, run
+- [Configuration](docs/configuration.md) — every environment variable and how to get the real credentials
+- [Architecture](docs/architecture.md) — how the apps, auth, billing and pipeline fit together
+- [Deployment](docs/deployment.md) — production checklist
+
+### Environment variables (all optional — features degrade gracefully without them)
+
+See [.env.example](.env.example) for the full annotated template. Groups:
+- Auth: GOOGLE_CLIENT_ID/SECRET, META_APP_ID/SECRET (provider hidden from login until set)
+- Billing: LEMONSQUEEZY_API_KEY/WEBHOOK_SECRET/STORE_ID + LEMONSQUEEZY_VARIANT_{STARTER,GROWTH,SCALE,TOPUP_5}; STRIPE_SECRET_KEY/WEBHOOK_SECRET + STRIPE_PRICE_{...}
+- Media: R2_ACCESS_KEY_ID/SECRET_ACCESS_KEY/BUCKET_NAME/ENDPOINT_URL (until set, uploads stay on local disk)
+- Email: EMAIL_HOST_USER/PASSWORD, DEFAULT_FROM_EMAIL (console backend in DEBUG)
+- Pipeline: DEEPGRAM_API_KEY, ELEVENLABS_API_KEY/VOICE_ID, DEEPSEEK_API_KEY/MODEL
+- Worker: CELERY_BROKER_URL (Redis). Empty = jobs run inline (dev only).
+
+### Run
+
+    python manage.py tailwind build   # after npm ci in theme/static_src
+    python manage.py migrate
+    python manage.py test             # 36 tests
+    python manage.py runserver 8001
+
+### Ops
+
+- validate_pending_uploads — ffprobe-check pending media
+- prune_job_scratch --older-than-days 7 — clean finished job workdirs
+- Webhooks (signature-verified, replay-safe): /billing/webhooks/lemonsqueezy/ and /billing/webhooks/stripe/
+
+
 ## Free 🆚 Premium
 
 
@@ -13,7 +55,6 @@
 | Django-allauth          | Django-allauth                     |
 | Postgresql              | Postgresql                         |
 | Docker                  | Docker                             |
- 
 
 &nbsp;
 
@@ -76,164 +117,83 @@ Start charging your users today → [Premium SaaS Boilerplate, ~~$199~~ $99 Laun
 
 ## Installation ⚙️
 
-This project is designed to run with **Docker**
+This project runs locally with Python + PostgreSQL. No Docker required.
 
 ### Prerequisites
 
-- **Docker** (with Docker Compose) installed  
-  - Windows / macOS: Download from [https://www.docker.com/products/docker-desktop/](https://www.docker.com/products/docker-desktop/)
-  - Linux: Follow your distro guide (e.g. `sudo apt install docker.io docker-compose` on Ubuntu)
-
-**Note:** You do **not** need to install Python, PostgreSQL, Node.js, or any other tools locally — Docker handles everything.
-
-&nbsp;
-
+- Python 3.13+
+- Node.js 18+ (only needed to build the Tailwind/DaisyUI CSS)
 
 ### Step-by-Step Setup
 
-1. **Clone the repository**
+1. **Create a virtualenv and install dependencies**
    ```bash
-   git clone https://github.com/cangeorgecode/Django_Boilerplate_Free.git app
-   cd app
+   python3 -m venv .venv
+   source .venv/bin/activate
+   pip install -r requirements.txt
+   ```
 
-2. **Create .env**  
-    ```bash
-    DEBUG = 'True' 
-    SECRET_KEY = # You need to copy from settings.py
-    ALLOWED_HOSTS=localhost,127.0.0.1,0.0.0.0,[::1]
+2. **Create `.env`**
+   ```bash
+   DEBUG='True'
+   SECRET_KEY=your-generated-secret-key
+   ALLOWED_HOSTS=localhost,127.0.0.1,[::1]
+   BASE_URL=http://localhost:8000
 
-    # Postgres
-    DB_HOST = ''
-    DB_NAME = ''
-    DB_USER = ''
-    DB_PASSWORD = ''
-    DB_SSLMODE = 'prefer' # ← Change to require in prod 
+   # Database: SQLite is the default and needs nothing.
+   # To use Postgres instead, uncomment:
+   # DB_ENGINE=postgres
+   # DB_HOST=localhost
+   # DB_NAME=your_db
+   # DB_USER=your_user
+   # DB_PASSWORD=your_password
+   # DB_SSLMODE=prefer
 
-    # Stripe
-    STRIPE_PUBLISHABLE_KEY = ''
-    STRIPE_SECRET_KEY = ''
-    STRIPE_WEBHOOK_SECRET = ''
-    STRIPE_PRODUCT_ID = ''
-    STRIPE_PRICE_ID = ''
+   # Stripe
+   STRIPE_PUBLISHABLE_KEY=
+   STRIPE_SECRET_KEY=
+   STRIPE_WEBHOOK_SECRET=
+   STRIPE_PRICE_ID=
+   ```
 
-    # For production, uncomment
-    # DATABASE_URL=postgres://user:pass@host:5432/dbname
-    # DJANGO_SETTINGS_MODULE=proj.settings.production
-    ```
+   Generate a secret key with:
+   ```bash
+   python -c "from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())"
+   ```
 
-3. **Install nginx (Skip to step 4 if you are testing on local machine)**  
-    I am using nginx in the host, not the docker nginx  
+3. **Build the frontend CSS (Tailwind + DaisyUI)**
+   ```bash
+   cd theme/static_src
+   npm install
+   npm run build        # one-time production build
+   # npm run dev        # watch mode while developing
+   cd ../..
+   ```
 
-    ```bash
-    sudo apt update  
-    ```   
+4. **Migrate and run**
+   ```bash
+   python manage.py migrate
+   python manage.py collectstatic --noinput
+   python manage.py runserver
+   ```
 
-    ```bash
-    sudo apt install nginx
-    ```  
-
-    **Configure /etc/nginx/sites-available/<app_name> as follows**  
-
-    ```bash
-    server {
-        listen 80;
-        server_name <domain_name>;
-
-    location /static/ {
-            alias /var/www/static/;
-            expires 30d;
-            access_log off;
-        }
-
-        location / {
-            proxy_pass http://127.0.0.1:8000;
-            proxy_set_header Host $host;
-            proxy_set_header X-Real-IP $remote_addr;
-            proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
-            proxy_set_header X-Forwarded-Proto $scheme;
-        }
-    }
-    ```  
-
-    ```bash
-    sudo ln -s /etc/nginx/sites-available/<app_name> /etc/nginx/sites-enabled
-
-    ```
-
-    **Create host static dir**  
-    ```bash
-    sudo mkdir -p /var/www/static
-    sudo chown -R www-data:www-data /var/www/static
-    ```
-
-    **Copy static files from container to host**  
-    ```bash
-    docker compose cp web:/app/staticfiles/. /var/www/static/
-    ```
-
-    **Reload nginx**
-    ```bash
-    sudo nginx -t
-    sudo systemctl restart nginx
-    ```
-
-
-4. **Build the application**  
-    ```bash
-    docker compose build --no-cache
-    ```
-
-    **Run the application in foreground**
-    ```bash
-    docker compose up
-    ```
-
-    **Run application in background**
-    ```bash
-    docker compose up -d
-    ```
-
-    **Supports Tailwind hot reload in development**  
-    ```bash
-    docker compose up -d  
-    docker compose run --rm web python manage.py tailwind dev
-    ```
-
-5. **Install certbot and get https for your app (Skip this step if you are testing on local machine)**
-    ```bash
-    sudo apt install certbot python3-certbot-nginx
-    sudo certbot --nginx -d <domain_name>
-    ```  
-
-6. **Open the app (locally)**
-    Go to: http://localhost:8000   
-
-7. **Troubleshooting commands**  
-    Here are some places to take a look at if things don't work:  
-
-    **Docker**  
-    ```bash
-    docker ps
-    docker compose logs web  
-    docker compose logs db
-    ```  
-
-    **Nginx**  
-    ```bash
-    sudo tail -20 /var/www/logs/nginx/error.log
-
-    sudo systemctl status nginx
-    ```
+5. **Open the app** → http://localhost:8000
 
 
 &nbsp;
 
 
+## Deployment 💰
 
-## Free Hosting on Linode 💰
+Deploy anywhere that runs Python (Linode, DigitalOcean, etc.). SQLite is fine on a single server for low-to-moderate traffic; switch to Postgres (`DB_ENGINE=postgres`) when you need multiple workers/servers or higher write volume.
 
-- I use Docker from the marketplace on Linode for this set up  
-- Hosting: $10/month (Get $60 credit on Linode with my [referral link](https://www.linode.com/lp/refer/?r=9ff0cd12e24c4e14bb041fd505242e605d1cc36d)
+1. Build the CSS (step 3 above) and run `python manage.py collectstatic --noinput`.
+2. Serve with gunicorn:
+   ```bash
+   gunicorn --bind 0.0.0.0:8000 proj.wsgi:application
+   ```
+3. Put nginx in front — proxy `/` to `127.0.0.1:8000` and serve `/static/` from the `staticfiles/` directory.
+4. Set `DEBUG='False'`, a real `SECRET_KEY`, and your domain in `ALLOWED_HOSTS`.
 
 
 &nbsp;
@@ -249,5 +209,3 @@ Hi, my name is George, a self-taught developer. My goal is to build a bunch of s
 
 
 P.S. If you like my project, a ⭐ would mean a lot to me, cheers! 🍻
-
-
